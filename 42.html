@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=1900">
+    <title>o-42
+    </title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+    <link rel="stylesheet" href="vendor/reveal/reset.css">
+    <link rel="stylesheet" href="vendor/reveal/reveal.css">
+    <link rel="stylesheet" href="vendor/reveal/theme/sky.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="vendor/reveal/plugin/highlight/zenburn.css">
+    <!--edit-->
+    <!-- Pollyfill script -->
+    <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+    <!-- Live2DCubismCore script -->
+    <script src="./dist/live2dcubismcore.js"></script>
+    <!-- Build script -->
+    <script src="./dist/bundle.js"></script>
+    <style>
+        ul,
+        ol {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .reveal {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 26px;
+        }
+
+        #pageIndex {
+            position: absolute;
+            right: 24px;
+            bottom: 24px;
+            background: #000;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .controls {
+            bottom: 24px !important;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!--
+            data-no: 老師網頁的cubism人物編號(從0開始，網頁上的編號-1)
+            data-positionx: cubism人物水平位移範圍(建議-1 ~ 0.9)
+            data-positiony: cubism人物垂直位移範圍(建議-0.9~0.4)
+            data-scale: cubism人物縮放(建議1~2之間的小數值，最大極限是3)
+            data-motionno: cubism人物指定動作編號(從0開始，請參閱model3.json檔案的ALL MOTION GROUP)
+            -->
+            <section>
+                <h3>40. 快樂數</h3>
+                <section data-no="6" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0"
+                    style="text-align: left"><br>
+                    假設將一個正整數 $S_0$ 各個位數的平方和表示為 $S_1$。以此類推，將 $S_1$ 各個位數的平方和表示為 $S_2$，並持續重複這個過程。<br><br>
+                    如果對於某個 $i \ge 1$，其結果 $S_i = 1$，那麼原本的整數 $S_0$ 就被稱為「快樂數（Happy number）」。反之，不快樂的數字則被稱為「不快樂數（Unhappy number）」。<br><br>
+                    例如，7 是一個快樂數，因為它的變化過程為：<br>
+                    &emsp;&emsp;7 $\rightarrow$ 49 $\rightarrow$ 97 $\rightarrow$ 130 $\rightarrow$ 10 $\rightarrow$ 1<br><br>
+                    而 4 是一個不快樂數，因為它的變化過程為：<br>
+                    &emsp;&emsp;4 $\rightarrow$ 16 $\rightarrow$ 37 $\rightarrow$ 58 $\rightarrow$ 89 $\rightarrow$ 145 $\rightarrow$ 42 $\rightarrow$ 20 $\rightarrow$ 4（陷入迴圈）<br><br>
+                </section>
+            </section>
+
+            <section>
+                <h3>輸入與輸出說明</h3>
+                <section data-no="6" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0"
+                    style="text-align: left"><br>
+                    輸入說明：<br><br>
+                    &emsp;&emsp;輸入包含多組測試資料。輸入的第一行會給定測試資料的總數。<br>
+                    &emsp;&emsp;每組測試資料僅佔一行，包含一個小於 $10^9$ 的正整數 $N$。<br><br>
+                    輸出說明：<br><br>
+                    &emsp;&emsp;對於每組測試資料，你必須印出以下其中一種訊息：<br>
+                    &emsp;&emsp;&emsp;&emsp;Case #p: N is a Happy number.<br>
+                    &emsp;&emsp;&emsp;&emsp;Case #p: N is an Unhappy number.<br><br>
+                    &emsp;&emsp;這裡的 p 代表測試資料的編號（從 1 開始計算）。如果數字 $N$ 是快樂數，你應該印出第一種訊息。否則，印出第二種訊息。<br><br>
+                </section>
+            </section>
+
+            <section>
+                <section data-no="6" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0"
+                    style="text-align: left">
+                    <table style="background-color: #fff; width: 100%; font-size: 20px;">
+                        <tr>
+                            <th>輸入輸出範例</th>
+                            <th>Input</th>
+                            <th>Output</th>
+                        </tr>
+                        <tr>
+                            <td>範例測資</td>
+                            <td>
+                                3<br>
+                                7<br>
+                                4<br>
+                                13
+                            </td>
+                            <td>
+                                Case #1: 7 is a Happy number.<br>
+                                Case #2: 4 is an Unhappy number.<br>
+                                Case #3: 13 is a Happy number.
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+
+            <section>
+                <h3>解答</h3>
+                <section data-no="8" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0"
+                    style="text-align: left"><br><br>
+                    <section data-auto-animate>
+                        <pre><code data-trim data-noescape>
+                        def isitPrime(k):
+                            # 如果 k 等於 2 或 3，則是質數
+                            if k==2 or k==3: return True
+                            # 如果 k 是偶數或小於 2，則不是質數
+                            if k%2==0 or k&lt;2: return False
+                            # 從 3 開始，以 2 為步進，檢查是否有因數
+                            for i in range(3, int(k**0.5)+1, 2):
+                                if k%i == 0:
+                                    return False
+                            # 如果沒有找到因數，則是質數
+                            return True
+                        
+                        def check(gen):
+                            if len(gen) == 0: # 空的基因
+                                return False
+                            if isitPrime(len(gen)): # 長度是質數
+                                return True
+                            return False
+                        
+                        def matches_pattern(seq):
+                            # 序列長度必須為 4，第一個字符是 'A'，最後一個字符是 'G'
+                            if len(seq) != 4 or seq[0] != 'A' or seq[-1] != 'G':
+                                return False
+                            # 第二個和第三個字符必須在 'E' 到 'T' 之間，且不相同
+                            return seq[1] in 'EFGHIJKLMNOPQRST' and seq[2] in 'EFGHIJKLMNOPQRST' and seq[1] != seq[2]
+                        
+                        def findGen(startTag, endTags, dna):
+                            length = len(dna)
+                            startIndex = dna.find(startTag) + 3 # 基因前面是 startTag 'ATG'，加上3移到基因開始的位置
+                            endIndex = length + 1 # 初始化結束點為超出範圍
+                            # 遍歷 DNA 字串，尋找符合模式的序列
+                            for i in range(len(dna) - 3):
+                                if matches_pattern(dna[i:i+4]):
+                                    # 找到符合模式的序列後，設定基因的起始索引
+                                    startIndex = i + 4
+                                    break
+                            # 遍歷所有終止標籤，找出最小的符合終止條件的索引
+                            for tag in endTags:
+                                endTemp = dna.find(tag, startIndex)
+                                if endTemp != -1 and endTemp &lt; endIndex:
+                                    endIndex = endTemp
+                            # 如果沒有找到有效的終止標籤或起始索引不正確，返回默認值
+                            if endIndex == length + 1 or startIndex &lt; 3:
+                                return 0, 0, 'None'
+                            # 提取基因序列
+                            gen = dna[startIndex:endIndex]
+                            # 驗證基因序列是否符合條件
+                            if check(gen):
+                                return 1, endIndex + 3, gen
+                            return 2, startIndex + 3, 'None'
+                        
+                        def finAllGen(fTag, bTag, dna):
+                            i, count = 0, 0
+                            ans = []
+                            maxlen = 0
+                            while True:
+                                dna = dna[i:] # 繼續在剩餘的 DNA 中尋找基因
+                                b, i, gen = findGen(fTag, bTag, dna) # b=1 表示找到基因，i 更新為下一次查找的起始索引
+                                if b == 1:
+                                    ans.append(gen) # 添加找到的基因
+                                    maxlen = max(maxlen, len(gen)) # 更新最大基因長度
+                                    count += 1 # 增加找到的基因數量
+                                elif b == 0: # 沒有找到更多基因
+                                    break
+                            ans.sort() # 將基因排序
+                            if count > 0: # 如果找到基因
+                                for i in range(0, maxlen + 1):
+                                    for j in ans:
+                                        if len(j) == i:
+                                            print(j) # 按長度順序輸出基因
+                            elif count == 0: # 如果完全沒找到基因
+                                print('No gene')
+                        
+                        # 讀取起始標籤
+                        fTag = input()
+                        # 讀取終止標籤，並以空格分隔
+                        bTag = input().split(" ")
+                        # 讀取 DNA 序列
+                        dna = input()
+                        
+                        # 查找並輸出所有基因
+                        finAllGen(fTag, bTag, dna)
+                    </code></pre>
+                    </section>
+                </section>
+            </section>
+        </div>
+    </div>
+    <div id="pageIndex"></div>
+    <!-- reveal.js-->
+    <script src="vendor/reveal/reveal.js"></script>
+    <!--plugin-->
+    <script src="vendor/reveal/plugin/math/math.js"></script>
+    <script src="vendor/reveal/plugin/search/search.js"></script>
+    <script src="vendor/reveal/plugin/zoom/zoom.js"></script>
+
+    <script src="vendor/reveal/plugin/notes/notes.js"></script>
+    <script src="vendor/reveal/plugin/markdown/markdown.js"></script>
+    <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+    <script src="main-ppt.js"></script>
+</body>
+
+</html>
