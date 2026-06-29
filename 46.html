@@ -180,11 +180,12 @@
                             for _ in range(n):
                                 a.append(int(data.pop(0)))
                                 
-                            ans = 0
+                            # 開始計算每筆測資前都會重置翻轉次數
+							ans = 0
                             # 雙層迴圈計算逆序對
                             for i in range(n):
                                 for j in range(i + 1, n):
-                                    # 如果前面的數字大於後面的數字
+                                    # 如果前面的數字大於後面的數字，翻轉次數加一
                                     if a[i] &gt; a[j]:
                                         ans += 1
                                         
