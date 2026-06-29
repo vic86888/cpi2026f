@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=1900">
+    <title>o-46
+    </title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+    <link rel="stylesheet" href="vendor/reveal/reset.css">
+    <link rel="stylesheet" href="vendor/reveal/reveal.css">
+    <link rel="stylesheet" href="vendor/reveal/theme/sky.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="vendor/reveal/plugin/highlight/zenburn.css">
+    <!--edit-->
+    <!-- Pollyfill script -->
+    <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+    <!-- Live2DCubismCore script -->
+    <script src="./dist/live2dcubismcore.js"></script>
+    <!-- Build script -->
+    <script src="./dist/bundle.js"></script>
+    <style>
+        ul,
+        ol {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .reveal {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 26px;
+        }
+
+        #pageIndex {
+            position: absolute;
+            right: 24px;
+            bottom: 24px;
+            background: #000;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .controls {
+            bottom: 24px !important;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!--
+            data-no: 老師網頁的cubism人物編號(從0開始，網頁上的編號-1)
+            data-positionx: cubism人物水平位移範圍(建議-1 ~ 0.9)
+            data-positiony: cubism人物垂直位移範圍(建議-0.9~0.4)
+            data-scale: cubism人物縮放(建議1~2之間的小數值，最大極限是3)
+            data-motionno: cubism人物指定動作編號(從0開始，請參閱model3.json檔案的ALL MOTION GROUP)
+            -->
+            <section>
+                <h3>46. 翻轉排序</h3>
+                <section data-no="6" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0"
+                    style="text-align: left"><br>
+                    在電腦科學中，排序是一個非常重要的環節。如果資料已經預先排序好，幾乎所有的問題都能被有效率地解決。<br><br>
+                    在這道題目中，我們將探討一種新的排序方法。在這種方法裡，你只能使用一種操作——<b>「翻轉（Flip）」</b>，也就是<b>交換兩個相鄰的元素</b>。稍微思考一下就會發現，用這種方式一定能將任何一組數字排序完成。<br><br>
+                    題目會給定一組整數。現在，我們想要用上述的方法，將這些數字由小到大（遞增）排序。你必須找出<b>最少需要幾次翻轉操作</b>。<br><br>
+                    例如：要將 1 2 3 排序不需要任何翻轉操作（0 次）；而要將 2 3 1 排序，則至少需要 2 次翻轉操作。<br><br>
+                </section>
+            </section>
+
+            <section>
+                <h3>輸入與輸出說明</h3>
+                <section data-no="6" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0"
+                    style="text-align: left"><br>
+                    輸入說明：<br><br>
+                    &emsp;&emsp;輸入包含多組測試資料。<br>
+                    &emsp;&emsp;每組測試資料開頭會給定一個正整數 $N$（$N \le 1000$）。<br>
+                    &emsp;&emsp;接下來的幾行會包含 $N$ 個整數。<br>
+                    &emsp;&emsp;輸入會持續進行，直到檔案結束（EOF）為止。<br><br>
+                    輸出說明：<br><br>
+                    &emsp;&emsp;對於每組測試資料，請印出以下格式的訊息：<br>
+                    &emsp;&emsp;&emsp;&emsp;Minimum exchange operations : M<br><br>
+                    &emsp;&emsp;其中 M 是完成排序所需的最少翻轉操作次數。每一組測資的輸出必須獨立成一行。<br><br>
+                </section>
+            </section>
+
+            <section>
+                <section data-no="6" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0"
+                    style="text-align: left">
+                    <table style="background-color: #fff; width: 100%; font-size: 20px;">
+                        <tr>
+                            <th>輸入輸出範例</th>
+                            <th>Input</th>
+                            <th>Output</th>
+                        </tr>
+                        <tr>
+                            <td>範例測資</td>
+                            <td>
+                                3<br>
+                                1 2 3<br>
+                                3<br>
+                                2 3 1
+                            </td>
+                            <td>
+                                Minimum exchange operations : 0<br>
+                                Minimum exchange operations : 2
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+
+            <section>
+                <h3>Hints</h3>
+                <section data-auto-animate
+                         data-no="17"
+                         data-positionx="0.8"
+                         data-positiony="0.03"
+                         data-scale="1"
+                         data-motionno="0"
+                         style="text-align: left;"><br>
+                    <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-15">
+                    # Step 1: 準備資料
+                    # 把所有輸入讀進來，切分後變成一個裝滿數字字串的「牌堆」(data)。
+
+                    # Step 2: 逐一處理 (只要牌堆還有牌就繼續)
+                    # 使用 pop(0) 從牌堆最前面「抽出」第一個數字，這就是陣列大小 N。
+                    # 準備一個空的陣列 a。
+                    # 跑 N 次迴圈，連續從牌堆抽出 N 個數字放進陣列 a 裡面。
+
+                    # Step 3: 計算逆序對 (Inversions)
+                    # 準備一個計數器 (ans)。
+                    # 使用雙層迴圈，拿出陣列裡的每一個數字 (第 i 個)，
+                    # 並且跟它「後面」的所有數字 (第 j 個) 做比較。
+                    # 如果發現「前面的數字大於後面的數字」，計數器就加 1。
+
+                    # Step 4: 輸出結果
+                    </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <h3>解答</h3>
+                <section data-auto-animate
+                         data-no="8"
+                         data-positionx="0.8"
+                         data-positiony="0.03"
+                         data-scale="1"
+                         data-motionno="0"
+                         style="text-align: left;">
+                    <font size="6">主程式</font>
+                    <pre style="font-size: 22px;"><code data-trim data-noescape data-line-numbers class="language-python">
+                    import sys
+
+                    def solve():
+                        # 讀取所有輸入內容，變成一個由左到右排好的「數字牌堆」
+                        data = sys.stdin.read().split()
+
+                        # 只要牌堆裡面還有數字，就繼續處理下一組測資
+                        while len(data) &gt; 0:
+                            # 抽出最前面的 1 個數字，當作陣列大小 N
+                            n = int(data.pop(0))
+                            
+                            a = []
+                            # 跑 N 次迴圈，抽出接下來的 N 個數字裝進陣列
+                            for _ in range(n):
+                                a.append(int(data.pop(0)))
+                                
+                            ans = 0
+                            # 雙層迴圈計算逆序對
+                            for i in range(n):
+                                for j in range(i + 1, n):
+                                    # 如果前面的數字大於後面的數字 (轉義 &gt;)
+                                    if a[i] &gt; a[j]:
+                                        ans += 1
+                                        
+                            # 輸出結果
+                            print(f"Minimum exchange operations : {ans}")
+
+                    if __name__ == '__main__':
+                        solve()
+                    </code></pre>
+                </section>
+            </section>
+			
+        </div>
+    </div>
+    <div id="pageIndex"></div>
+    <!-- reveal.js-->
+    <script src="vendor/reveal/reveal.js"></script>
+    <!--plugin-->
+    <script src="vendor/reveal/plugin/math/math.js"></script>
+    <script src="vendor/reveal/plugin/search/search.js"></script>
+    <script src="vendor/reveal/plugin/zoom/zoom.js"></script>
+
+    <script src="vendor/reveal/plugin/notes/notes.js"></script>
+    <script src="vendor/reveal/plugin/markdown/markdown.js"></script>
+    <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+    <script src="main-ppt.js"></script>
+</body>
+
+</html>
