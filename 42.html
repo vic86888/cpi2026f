@@ -135,71 +135,77 @@
 						 data-scale="1"
 						 data-motionno="0"
 						 style="text-align: left;"><br>
-					<pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="14-20|1-20">
-					def calcSquareSum(n):
-						# 將數字轉換為字串，逐一取出位數轉為整數
-						# 計算每個數字的平方，並將其全部加總後回傳
+					<pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-15">
+					# Step 1: 讀取資料
+					# 讀取測試資料的總筆數，並開始用迴圈逐一處理每個數字。
 
-					def isHappy(n):
-						# 建立一個集合 (set) 用來記錄已經計算過的數字
-						# 使用 while 迴圈持續計算，直到數字變成 1 為止
-						# 迴圈內判斷：如果數字已出現在集合中，代表陷入無窮迴圈，回傳 False
-						# 若無重複，則將當前數字加入集合中記錄
-						# 呼叫 calcSquareSum 更新當前數字
-						# 若成功跳出迴圈 (數字等於 1)，回傳 True
+					# Step 2: 迴圈前的準備
+					# 把當下的數字存起來備用 (original_n)。
+					# 準備一個「空集合 (set)」，用來記錄等等計算過程中出現過的所有數字。
 
-					def main():
-						# 讀取所有的輸入資料
-						# 取得測試資料的總筆數 T
-						# 跑迴圈逐一處理每一筆測試資料
-						# 呼叫 isHappy(n) 判斷該數字是否為快樂數
-						# 依照題目要求的格式，結合迴圈次數輸出結果 (Case #p: ...)
+					# Step 3: 開始拆解與計算 (while 迴圈)
+					# 只要數字還沒變成 1，就持續執行以下動作：
+					#   (1) 檢查當前的數字是不是已經在集合裡出現過了？
+					#       - 如果是：代表陷入無窮迴圈，立刻跳出迴圈 (break)。
+					#       - 如果不是：把它加進集合中記錄下來。
+					#   (2) 將數字轉換為字串，逐一取出位數轉為整數，計算平方後加總，變成新的數字。
+
+					# Step 4: 判斷結果
+					# 迴圈結束後，檢查數字是不是等於 1。
+					# 是的話印出 Happy number，否則印出 Unhappy number。
+					</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<h3>解答</h3>
+				<section data-auto-animate
+						 data-no="8"
+						 data-positionx="0.8"
+						 data-positiony="0.03"
+						 data-scale="1"
+						 data-motionno="0"
+						 style="text-align: left;">
+					<font size="6">主程式</font>
+					<pre style="font-size: 22px;"><code data-trim data-noescape data-line-numbers class="language-python">
+					import sys
+
+					# 讀取所有輸入內容
+					input_data = sys.stdin.read().split()
+
+					if input_data:
+						# 第一個數字是測試資料的總筆數
+						T = int(input_data[0]) 
 						
+						# 從第 1 個數字開始，逐一處理每筆測試資料
+						for cas in range(1, T + 1):
+							n = int(input_data[cas])
+							original_n = n  # 把原始數字存起來，最後輸出會用到
+							
+							# 建立一個集合來記錄出現過的數字
+							seen = set() 
+							
+							# 當數字還沒變成 1 時，持續計算
+							while n != 1:
+								# 如果數字已經出現在集合中，代表陷入迴圈，提早結束
+								if n in seen:
+									break
+								
+								# 把現在的數字記錄到集合中
+								seen.add(n)
+								
+								# 將數字變字串，把每個位數拆開平方後相加
+								n = sum(int(digit)**2 for digit in str(n))
+								
+							# 判斷結果並輸出
+							if n == 1:
+								print(f"Case #{cas}: {original_n} is a Happy number.")
+							else:
+								print(f"Case #{cas}: {original_n} is an Unhappy number.")
 					</code></pre>
 				</section>
 			</section>
 			
-			<section>
-                <h3>解答</h3>
-                <section data-no="8" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0"
-                    style="text-align: left"><br><br>
-                    <section data-auto-animate>
-                        <pre><code data-trim data-noescape>
-                        import sys
-
-                        def solve():
-                            # 讀取所有輸入內容
-                            input_data = sys.stdin.read().split()
-                            if not input_data:
-                                return
-                                
-                            T = int(input_data[0]) # 測試資料筆數
-                            
-                            for cas in range(1, T + 1):
-                                original_n = int(input_data[cas])
-                                n = original_n
-                                seen = set() # 建立一個集合來記錄出現過的數字
-                                
-                                while n != 1:
-                                    if n in seen:
-                                        break # 數字重複出現，代表陷入迴圈
-                                    seen.add(n)
-                                    
-                                    # 計算各位數的平方和 (Python 簡潔寫法)
-                                    n = sum(int(digit)**2 for digit in str(n))
-                                    
-                                # 輸出結果
-                                if n == 1:
-                                    print(f"Case #{cas}: {original_n} is a Happy number.")
-                                else:
-                                    print(f"Case #{cas}: {original_n} is an Unhappy number.")
-                        
-                        if __name__ == '__main__':
-                            solve()
-                        </code></pre>
-                    </section>
-                </section>
-            </section>
         </div>
     </div>
     <div id="pageIndex"></div>
