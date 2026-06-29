@@ -167,25 +167,26 @@
                     import sys
 
                     def solve():
-                        # 讀取所有輸入內容，變成一個由左到右排好的「數字牌堆」
+                        # 讀取所有輸入內容，變成數字牌堆
                         data = sys.stdin.read().split()
 
-                        # 只要牌堆裡面還有數字，就繼續處理下一組測資
+                        # 只要牌堆裡面還有數字就繼續
                         while len(data) &gt; 0:
-                            # 抽出最前面的 1 個數字，當作陣列大小 N
+                            # 抽出 1 個數字當作陣列大小 N
                             n = int(data.pop(0))
                             
                             a = []
-                            # 跑 N 次迴圈，抽出接下來的 N 個數字裝進陣列
+                            # 抽出 N 個數字裝進陣列
                             for _ in range(n):
                                 a.append(int(data.pop(0)))
+                                
+                            # 開始計算每筆測資前重置翻轉次數
+                            ans = 0
                             
-							# 開始計算每筆測資前都會重置翻轉次數
-							ans = 0
                             # 雙層迴圈計算逆序對
                             for i in range(n):
                                 for j in range(i + 1, n):
-                                    # 如果前面的數字大於後面的數字，翻轉次數加一
+                                    # 若前面的數字大於後面的數字，次數加一
                                     if a[i] &gt; a[j]:
                                         ans += 1
                                         
