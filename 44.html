@@ -56,6 +56,13 @@
       padding: 0px; 
       width: 1100px;
     }
+
+    .sample-table, .sample-th, .sample-td {
+      border: none;
+      border-collapse: collapse;
+      padding: 0px;
+      width: 1100px;
+    }
     
     .pokerText {
       text-align: center;
@@ -143,7 +150,8 @@
             </tr>
             <tr>
                 <td class="td">輸入包含多組測試資料，每行包含一組兩個整數 i 和 j<br><br>
-                所有整數皆滿足：0 < i, j < 10000</td>
+                所有整數皆滿足：0 < i, j < 10000<br><br>
+                當 i 和 j 同時為 0 時，表示輸入結束</td>
                 <td class="td">對於每組輸入，輸出一行：<br>
                 i   j   最大_cycle_length<br><br>
                 注意：輸出的 i 和 j 必須保持與輸入時相同的順序</td>   
@@ -162,26 +170,26 @@
         data-motionno="0"
         style="text-align: left"><br>
         <p><b>範例輸入說明：</b></p>
-        <table class="table">
+        <table class="sample-table">
             <tr>
-                <th class="th">Sample Input</th>
-                <th class="th">Sample Output</th>
+                <th class="sample-th">Sample Input</th>
+                <th class="sample-th">Sample Output</th>
             </tr>
             <tr>
-              <td class="td">1 10</td>
-              <td class="td">1 10 20</td>
+              <td class="sample-td">1 10</td>
+              <td class="sample-td">1 10 20</td>
             </tr>
             <tr>
-              <td class="td">100 200</td>
-              <td class="td">100 200 125</td>
+              <td class="sample-td">100 200</td>
+              <td class="sample-td">100 200 125</td>
             </tr>
             <tr>
-              <td class="td">201 210</td>
-              <td class="td">201 210 89</td>
+              <td class="sample-td">201 210</td>
+              <td class="sample-td">201 210 89</td>
             </tr>
             <tr>
-              <td class="td">900 1000</td>
-              <td class="td">900 1000 174</td>
+              <td class="sample-td">900 1000</td>
+              <td class="sample-td">900 1000 174</td>
             </tr>
           </table>
         </section>
@@ -275,27 +283,21 @@
         <p style="font-size: 24px;"><b>提示 2：主程式的架構</b></p>
         <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers>
         def main():
+            data = []
+
             while True:
                 try:
-                    # 讀取輸入的 i 和 j
-                    line = input()
-                    i, j = map(int, line.split())
-                    
-                    # 確定範圍的最小值和最大值（因為 i 可能比 j 大）
-                    min_val = min(i, j)
-                    max_val = max(i, j)
-                    
-                    # 找出範圍內所有數字的最大 cycle-length
-                    max_cycle_length = 0
-                    for n in range(min_val, max_val + 1):
-                        cycle_length = CalculateCycleLength(n)
-                        if cycle_length > max_cycle_length:
-                            max_cycle_length = cycle_length
-                    
-                    # 輸出結果（注意：i 和 j 要保持原本的順序）
-                    print(i, j, max_cycle_length)
+                    i, j = map(int, input().split())
                 except EOFError:
                     break
+
+                if i == 0 and j == 0:
+                    break
+
+                data.append((i, j))
+
+            for i, j in data:
+                print(i, j, FindMaxCycleLength(i, j))
         </code></pre>
         </section>
 
@@ -385,22 +387,21 @@
           <font size=6>主程式：main() - 處理輸入和輸出</font>
           <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
           def main():
-              # 不斷讀取輸入直到檔案結束
+              data = []
+
               while True:
                   try:
-                      # 讀取一行輸入
-                      line = input()
-                      # 分割字串並轉換為整數
-                      i, j = map(int, line.split())
-                      
-                      # 找出範圍內的最大 cycle-length
-                      max_length = FindMaxCycleLength(i, j)
-                      
-                      # 輸出結果（i 和 j 保持原本的順序）
-                      print(i, j, max_length)
+                      i, j = map(int, input().split())
                   except EOFError:
-                      # 當到達檔案結束時，停止程式
                       break
+
+                  if i == 0 and j == 0:
+                      break
+
+                  data.append((i, j))
+
+              for i, j in data:
+                  print(i, j, FindMaxCycleLength(i, j))
           </code></pre>
         </section>
 
@@ -453,14 +454,21 @@
               return max_cycle
 
           def main():
+              data = []
+
               while True:
                   try:
-                      line = input()
-                      i, j = map(int, line.split())
-                      max_length = FindMaxCycleLength(i, j)
-                      print(i, j, max_length)
+                      i, j = map(int, input().split())
                   except EOFError:
                       break
+
+                  if i == 0 and j == 0:
+                      break
+
+                  data.append((i, j))
+
+              for i, j in data:
+                  print(i, j, FindMaxCycleLength(i, j))
 
           if __name__ == '__main__':
               main()

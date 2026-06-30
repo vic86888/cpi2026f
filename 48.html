@@ -233,20 +233,23 @@
         <p style="font-size: 24px;"><b>提示 2：主程式的架構</b></p>
         <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers>
         def main():
-            numbers = []  # 用一個列表來存放所有讀入的數字
+            numbers = []
+            answers = []
+
             while True:
                 try:
-                    # 讀取輸入的整數
                     x = int(input())
-                    # 將新的數字加入列表
-                    numbers.append(x)
-                    # 計算目前的中位數
-                    median = CalculateMedian(numbers)
-                    # 輸出中位數
-                    print(median)
                 except EOFError:
-                    # 當到達檔案結束時，停止程式
                     break
+
+                if x == 0:
+                    break
+
+                numbers.append(x)
+                answers.append(CalculateMedian(numbers))
+
+            for ans in answers:
+                print(ans)
         </code></pre>
         </section>
 
@@ -405,23 +408,23 @@
           <font size=6>主程式：main() - 處理輸入和輸出</font>
           <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
           def main():
-              # 建立一個空列表來存放所有讀入的數字
               numbers = []
-              
-              # 不斷讀取輸入直到檔案結束
+              answers = []
+
               while True:
                   try:
-                      # 讀取一行輸入並轉換為整數
                       x = int(input())
-                      # 將新的數字加入列表
-                      numbers.append(x)
-                      # 計算目前所有數字的中位數
-                      median = CalculateMedian(numbers)
-                      # 輸出目前的中位數
-                      print(median)
                   except EOFError:
-                      # 當到達檔案結束時，停止程式
                       break
+
+                  if x == 0:
+                      break
+
+                  numbers.append(x)
+                  answers.append(CalculateMedian(numbers))
+
+              for ans in answers:
+                  print(ans)
           </code></pre>
         </section>
 
@@ -449,7 +452,7 @@
           def CalculateMedian(numbers):
               sorted_nums = sorted(numbers)
               n = len(sorted_nums)
-              
+
               if n % 2 == 1:
                   return sorted_nums[n // 2]
               else:
@@ -459,14 +462,22 @@
 
           def main():
               numbers = []
+              answers = []
+
               while True:
                   try:
                       x = int(input())
-                      numbers.append(x)
-                      median = CalculateMedian(numbers)
-                      print(median)
                   except EOFError:
                       break
+
+                  if x == 0:
+                      break
+
+                  numbers.append(x)
+                  answers.append(CalculateMedian(numbers))
+
+              for ans in answers:
+                  print(ans)
 
           if __name__ == '__main__':
               main()
