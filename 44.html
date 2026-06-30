@@ -245,15 +245,23 @@
           # 3. 計數有幾步（cycle-length）
           # 4. 回傳這個 cycle-length
           
+          cache = {1: 1}
+
           def CalculateCycleLength(n):
-              count = 1  # 計數器，從 1 開始（因為要計算 n 本身）
-              while n != 1:
+              # 使用快取表避免重複計算 3n+1 序列
+              seq = []
+              while n not in cache:
+                  seq.append(n)
                   if n % 2 == 1:  # 如果 n 是奇數
                       n = 3 * n + 1
                   else:  # 如果 n 是偶數
                       n = n // 2
-                  count += 1  # 每次計算就加 1
-              return count
+
+              length = cache[n]
+              for x in reversed(seq):
+                  length += 1
+                  cache[x] = length
+              return cache[seq[0]] if seq else length
           </code></pre>
         </section>
 
@@ -320,17 +328,23 @@
           data-motionno="0">
           <font size=6>副程式：CalculateCycleLength() - 計算單一整數的 cycle-length</font>
           <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          cache = {1: 1}
+
           def CalculateCycleLength(n):
-              # count 用來記錄有幾個數字被輸出
-              count = 1
-              # 當 n 不等於 1 時，持續進行演算法
-              while n != 1:
+              # 使用快取表避免重複計算 3n+1 序列
+              seq = []
+              while n not in cache:
+                  seq.append(n)
                   if n % 2 == 1:  # 檢查 n 是否為奇數（n 除以 2 的餘數是否為 1）
                       n = 3 * n + 1  # 如果是奇數，執行 n = 3n + 1
                   else:  # 否則 n 是偶數
                       n = n // 2  # 執行 n = n / 2（使用整數除法）
-                  count += 1  # 每計算一次，cycle-length 就增加 1
-              return count  # 回傳最終的 cycle-length
+
+              length = cache[n]
+              for x in reversed(seq):
+                  length += 1
+                  cache[x] = length
+              return cache[seq[0]] if seq else length
           </code></pre>
         </section>
 
@@ -411,15 +425,22 @@
           data-motionno="0">
           <font size=6>完整解答程式碼</font>
           <pre style="font-size: 20px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          cache = {1: 1}
+
           def CalculateCycleLength(n):
-              count = 1
-              while n != 1:
+              seq = []
+              while n not in cache:
+                  seq.append(n)
                   if n % 2 == 1:
                       n = 3 * n + 1
                   else:
                       n = n // 2
-                  count += 1
-              return count
+
+              length = cache[n]
+              for x in reversed(seq):
+                  length += 1
+                  cache[x] = length
+              return cache[seq[0]] if seq else length
 
           def FindMaxCycleLength(i, j):
               min_val = min(i, j)
