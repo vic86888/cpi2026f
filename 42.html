@@ -135,24 +135,28 @@
 						 data-scale="1"
 						 data-motionno="0"
 						 style="text-align: left;"><br>
-					<pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-20">
-					# Step 1: 讀取資料
-					# 讀取測試資料的總筆數，並開始用迴圈逐一處理每個數字。
+					<pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-23">
+					# Step 1: 讀取資料與準備
+					# 讀取測試資料的總筆數 T。
+					# 準備一個「空的收集箱 (陣列)」，用來等一下存放所有的判斷結果。
 
-					# Step 2: 迴圈前的準備
-					# 把當下的數字存起來備用 (original_n)。
-					# 準備一個「空集合 (set)」，用來記錄等等計算過程中出現過的所有數字。
+					# Step 2: 逐一處理測資
+					# 跑迴圈處理每個數字。先把當下的數字存起來備用 (original_n)。
+					# 準備一個「空集合 (set)」，用來記錄計算過程中出現過的所有數字。
 
 					# Step 3: 開始拆解與計算 (while 迴圈)
 					# 只要數字還沒變成 1，就持續執行以下動作：
 					#   (1) 檢查當前的數字是不是已經在集合裡出現過了？
 					#       - 如果是：代表陷入無窮迴圈，立刻跳出迴圈 (break)。
 					#       - 如果不是：把它加進集合中記錄下來。
-					#   (2) 將數字轉換為字串，逐一取出位數轉為整數，計算平方後加總，變成新的數字。
+					#   (2) 將數字轉換為字串，逐一取出位數轉為整數，計算平方後加總。
 
-					# Step 4: 判斷結果
+					# Step 4: 判斷並暫存結果
 					# 迴圈結束後，檢查數字是不是等於 1。
-					# 是的話印出 Happy number，否則印出 Unhappy number。
+					# 把對應的 Happy 或 Unhappy 訊息字串，裝進剛剛準備好的「收集箱」裡。
+
+					# Step 5: 統一輸出
+					# 等所有的測試資料都計算完畢後，把收集箱裡的結果一次全部印出來。
 					</code></pre>
 				</section>
 			</section>

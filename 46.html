@@ -125,8 +125,8 @@
             </section>
 
             <section>
-                <h3>Hints</h3>
-                <section data-auto-animate
+				<h3>Hints</h3>
+				<section data-auto-animate
                          data-no="17"
                          data-positionx="0.8"
                          data-positiony="0.03"
@@ -134,13 +134,13 @@
                          data-motionno="0"
                          style="text-align: left;"><br>
                     <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-15">
-                    # Step 1: 準備資料
-                    # 把所有輸入讀進來，切分後變成一個裝滿數字字串的「牌堆」(data)。
+                    # Step 1: 讀取陣列大小 N
+                    # 讀取輸入的第一行，並轉換為整數 N。
 
-                    # Step 2: 逐一處理 (只要牌堆還有牌就繼續)
-                    # 使用 pop(0) 從牌堆最前面「抽出」第一個數字，這就是陣列大小 N。
+                    # Step 2: 收集陣列資料
                     # 準備一個空的陣列 a。
-                    # 跑 N 次迴圈，連續從牌堆抽出 N 個數字放進陣列 a 裡面。
+                    # 因為測資的數字可能全部寫在同一行，也可能分好幾行寫，
+                    # 所以使用迴圈持續讀取，直到陣列 a 裡面剛好裝滿 N 個數字為止。
 
                     # Step 3: 計算逆序對 (Inversions)
                     # 準備一個計數器 (ans)。
@@ -149,9 +149,10 @@
                     # 如果發現「前面的數字大於後面的數字」，計數器就加 1。
 
                     # Step 4: 輸出結果
+                    # 印出最終計數器的數字，這就是最少需要的翻轉次數。
                     </code></pre>
                 </section>
-            </section>
+			</section>
 
             <section>
 				<h3>解答</h3>
