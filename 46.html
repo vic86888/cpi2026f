@@ -125,14 +125,14 @@
             </section>
 
             <section>
-				<h3>Hints</h3>
-				<section data-auto-animate
+                <section data-auto-animate
                          data-no="17"
                          data-positionx="0.8"
                          data-positiony="0.03"
                          data-scale="1"
                          data-motionno="0"
-                         style="text-align: left;"><br>
+                         style="text-align: left;">
+                    <h3>Hints</h3>
                     <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-15">
                     # Step 1: 讀取陣列大小 N
                     # 讀取輸入的第一行，並轉換為整數 N。
@@ -152,7 +152,34 @@
                     # 印出最終計數器的數字，這就是最少需要的翻轉次數。
                     </code></pre>
                 </section>
-			</section>
+
+                <section data-auto-animate
+                         data-no="17"
+                         data-positionx="0.8"
+                         data-positiony="0.03"
+                         data-scale="1"
+                         data-motionno="0"
+                         style="text-align: left;">
+                    <h3>語法小教室：字串處理雙神兵</h3>
+                    <br>
+                    <p style="font-size: 26px;">
+                        在手動輸入測資時，有時會不小心多按空白鍵或換行，<br>
+                        這時 <code>strip()</code> 和 <code>split()</code> 就能幫我們把雜質過濾掉！
+                    </p>
+                    <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python">
+                    # 1. strip()：脫掉頭尾的多餘空白與換行符號
+                    text = "   123   \n"
+                    clean_text = text.strip() 
+                    print(clean_text)  # 結果變成乾淨的 "123"
+
+                    # 2. split()：把字串當作西瓜，遇到空白就切一刀，變成陣列
+                    line = "2   3  1"
+                    pieces = line.split()
+                    print(pieces)      # 結果變成 ['2', '3', '1']
+                    # 注意：它會聰明地無視連續的空白！
+                    </code></pre>
+                </section>
+            </section>
 
             <section>
 				<h3>解答</h3>

@@ -127,39 +127,93 @@
             </section>
 
             <section>
-				<h3>Hints</h3>
-				<section data-auto-animate
-						 data-no="17"
-						 data-positionx="0.8"
-						 data-positiony="0.03"
-						 data-scale="1"
-						 data-motionno="0"
-						 style="text-align: left;"><br>
-					<pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-23">
-					# Step 1: 讀取資料與準備
-					# 讀取測試資料的總筆數 T。
-					# 準備一個「空的收集箱 (陣列)」，用來等一下存放所有的判斷結果。
+                <section data-auto-animate
+                         data-no="17"
+                         data-positionx="0.8"
+                         data-positiony="0.03"
+                         data-scale="1"
+                         data-motionno="0"
+                         style="text-align: left;">
+                    <h3>Hints</h3>
+                    <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-23">
+                    # Step 1: 讀取資料與準備
+                    # 讀取測試資料的總筆數 T。
+                    # 準備一個「空的收集箱 (陣列)」，用來等一下存放所有的判斷結果。
 
-					# Step 2: 逐一處理測資
-					# 跑迴圈處理每個數字。先把當下的數字存起來備用 (original_n)。
-					# 準備一個「空集合 (set)」，用來記錄計算過程中出現過的所有數字。
+                    # Step 2: 逐一處理測資
+                    # 跑迴圈處理每個數字。先把當下的數字存起來備用 (original_n)。
+                    # 準備一個「空集合 (set)」，用來記錄計算過程中出現過的所有數字。
 
-					# Step 3: 開始拆解與計算 (while 迴圈)
-					# 只要數字還沒變成 1，就持續執行以下動作：
-					#   (1) 檢查當前的數字是不是已經在集合裡出現過了？
-					#       - 如果是：代表陷入無窮迴圈，立刻跳出迴圈 (break)。
-					#       - 如果不是：把它加進集合中記錄下來。
-					#   (2) 將數字轉換為字串，逐一取出位數轉為整數，計算平方後加總。
+                    # Step 3: 開始拆解與計算 (while 迴圈)
+                    # 只要數字還沒變成 1，就持續執行以下動作：
+                    #   (1) 檢查當前的數字是不是已經在集合裡出現過了？
+                    #       - 如果是：代表陷入無窮迴圈，立刻跳出迴圈 (break)。
+                    #       - 如果不是：把它加進集合中記錄下來。
+                    #   (2) 將數字轉換為字串，逐一取出位數轉為整數，計算平方後加總。
 
-					# Step 4: 判斷並暫存結果
-					# 迴圈結束後，檢查數字是不是等於 1。
-					# 把對應的 Happy 或 Unhappy 訊息字串，裝進剛剛準備好的「收集箱」裡。
+                    # Step 4: 判斷並暫存結果
+                    # 迴圈結束後，檢查數字是不是等於 1。
+                    # 把對應的 Happy 或 Unhappy 訊息字串，裝進剛剛準備好的「收集箱」裡。
 
-					# Step 5: 統一輸出
-					# 等所有的測試資料都計算完畢後，把收集箱裡的結果一次全部印出來。
-					</code></pre>
-				</section>
-			</section>
+                    # Step 5: 統一輸出
+                    # 等所有的測試資料都計算完畢後，把收集箱裡的結果一次全部印出來。
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate
+                         data-no="17"
+                         data-positionx="0.8"
+                         data-positiony="0.03"
+                         data-scale="1"
+                         data-motionno="0"
+                         style="text-align: left;">
+                    <h3>語法小教室：set() 集合</h3>
+                    <br>
+                    <p style="font-size: 26px;">
+                        <code>set()</code> 就像是一個<b>「不能放重複物品的百寶袋」</b>。<br>
+                        在快樂數這題，我們用它來記錄數字變化時踩過的「足跡」。
+                    </p>
+                    <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python">
+                    seen = set() # 建立一個空的集合
+                    
+                    seen.add(4)
+                    seen.add(16)
+                    seen.add(4)  # 試圖放入重複的數字會被自動無視！
+
+                    print(seen)  # 結果會是 {4, 16}
+
+                    # 檢查數字有沒有在裡面，速度極快！
+                    if 16 in seen:
+                        print("16 已經出現過囉！")
+                    </code></pre>
+                </section>
+
+                <section data-auto-animate
+                         data-no="17"
+                         data-positionx="0.8"
+                         data-positiony="0.03"
+                         data-scale="1"
+                         data-motionno="0"
+                         style="text-align: left;">
+                    <h3>語法小教室：一行算完平方和</h3>
+                    <br>
+                    <p style="font-size: 26px;">
+                        程式碼：<code>n = sum(int(digit)**2 for digit in str(n))</code><br>
+                        這個寫法叫做「生成器運算式」，其實它就是把以下四行程式碼縮寫成一行：
+                    </p>
+                    <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python">
+                    n = 49
+                    total = 0
+
+                    # str(n) 會把 49 變成字串 "49"，然後迴圈會分別拿出 '4' 和 '9'
+                    for digit in str(n):
+                        number = int(digit)    # 轉回整數 4 
+                        total += number ** 2   # 計算 4 的平方(16) 並加到總和裡
+                        
+                    n = total # 最後 n 變成 97
+                    </code></pre>
+                </section>
+            </section>
 
 			<section>
 				<h3>解答</h3>
