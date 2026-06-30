@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1900">
+  <title>48 What is the Median</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="vendor/reveal/theme/sky.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="vendor/reveal/plugin/highlight/zenburn.css"><!--edit-->
+  <!-- Pollyfill script -->
+  <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+  <!-- Live2DCubismCore script -->
+  <script src="./dist/live2dcubismcore.js"></script>
+  <!-- Build script -->
+  <script src="./dist/bundle.js"></script>
+  <style>
+    ul,
+    ol {
+        list-style: none;
+        margin-left: 0;
+    }
+
+    .reveal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 26px;
+    }
+
+    #pageIndex {
+        position: absolute;
+        right: 24px;
+        bottom: 24px;
+        background: #000;
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .controls {
+        bottom: 24px !important;
+    }
+    .table, .th, .td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 0px; 
+      width: 1100px;
+    }
+    
+    .pokerText {
+      text-align: center;
+      vertical-align:middle;
+    }
+
+    /* .pokerTextWinner {
+      text-align: center;
+      vertical-align:middle;
+      color: red;
+    } */
+    .pokerTable {
+      border: 1px solid black;
+      border-collapse: collapse;
+      width: 800px;
+    }
+
+    .pokerRow {
+      height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!--
+         data-no: 老師網頁的cubism人物編號(從0開始，網頁上的編號-1)
+         data-positionx: cubism人物水平位移範圍(建議-1 ~ 0.9)
+         data-positiony: cubism人物垂直位移範圍(建議-0.9~0.4)
+         data-scale: cubism人物縮放(建議1~2之間的小數值，最大極限是3)
+         data-motionno: cubism人物指定動作編號(從0開始，請參閱model3.json檔案的ALL MOTION GROUP)
+      -->
+
+      <!--Q1-->
+      <section>
+        <h3 style="text-align: left;">48 What is the Median</h3>
+        <section 
+        data-no="6"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left"><br><br>
+        <font size=5><b>What is the Median？（中位數是什麼？）</b><br><br>
+        <b>中位數（Median）</b> 在統計學中扮演著重要的角色。<br><br>
+        根據定義，中位數是能夠將一組資料分成兩個大小相等部分的數值。<br><br>
+        例如，有五個數：{1, 3, 6, 2, 7}<br>
+        排序後為：{1, 2, 3, 6, 7}<br><br>
+        其中 <b>3</b> 就是中位數，因為它左右兩邊各有兩個數：<br>
+        左邊：{1, 2}<br>
+        右邊：{6, 7}<br><br>
+        </font>
+        </section>
+
+        <section 
+        data-no="6"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left">
+        <p><b>關鍵概念：</b><br><br>
+        若資料個數為偶數，例如：{1, 3, 6, 2, 7, 8}<br>
+        排序後為：{1, 2, 3, 6, 7, 8}<br><br>
+        由於沒有單一一個數能將資料平分，因此中位數定義為中間兩個數的平均值：<br>
+        <b>(3 + 6) / 2 = 4.5</b><br><br>
+        <b>但本題只需要輸出整數部分，不保留小數。</b><br>
+        因此，本題中的中位數為：<b>4</b><br><br>
+        <b>【你的任務】</b><br>
+        每讀入一個整數，就立即輸出目前所有已讀入數字的中位數。<br>
+        也就是說：讀入第 1 個數後輸出一次、讀入第 2 個數後再輸出一次…… 每新增一個數，都要重新計算並輸出目前的中位數。
+        </p>
+        <table class="table">
+            <tr>
+                <th class="th">輸入說明</th>
+                <th class="th">輸出說明</th>
+            </tr>
+            <tr>
+                <td class="td">輸入包含一連串整數 X，每行一個<br><br>
+                範圍：0 ≤ X < 2³¹<br>
+                總共輸入的整數數量 N 小於 10000<br>
+                每個數字前後可能包含空白字元</td>
+                <td class="td">每讀入一個整數，就輸出一行<br>
+                輸出目前所有已讀入數字的中位數<br>
+                若數量為偶數，取中間兩個數的平均值，只輸出整數部分（無條件捨去）</td>   
+            </tr>
+        </table>
+        </section>
+      </section>
+
+      <section>
+        <h3>Input/Output</h3><br> 
+        <section data-auto-animate
+        data-no="6" 
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left"><br>
+        <p><b>範例輸入說明：</b></p>
+        <table class="table">
+            <tr>
+                <th class="th">Sample Input</th>
+                <th class="th">Sample Output</th>
+            </tr>
+            <tr>
+              <td class="td">1<br>3<br>4<br>60<br>70<br>50<br>2</td>
+              <td class="td">1<br>2<br>3<br>3<br>4<br>27<br>4</td>
+            </tr>
+          </table>
+        </section>
+
+        <section data-auto-animate
+          data-no="6" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left"><br>
+          <p><b>輸出範例說明：</b><br><br>
+          依序加入資料：<br><br>
+          | 已讀入的數字 | 排序後 | 中位數 |<br>
+          | 1 | 1 | 1 |<br>
+          | 1, 3 | 1 3 | (1+3)/2 = 2 |<br>
+          | 1, 3, 4 | 1 3 4 | 3 |<br>
+          | 1, 3, 4, 60 | 1 3 4 60 | (3+4)/2 = 3 |<br>
+          | 1, 3, 4, 60, 70 | 1 3 4 60 70 | 4 |<br>
+          | 1, 3, 4, 50, 60, 70 | 1 3 4 50 60 70 | (4+50)/2 = 27 |<br>
+          | 1, 2, 3, 4, 50, 60, 70 | 1 2 3 4 50 60 70 | 4 |<br><br>
+          <b>所以輸出結果依序為：1, 2, 3, 3, 4, 27, 4</b></p>
+        </section>
+      </section>
+
+      <section>
+        <h3>Hints</h3>
+        <section data-auto-animate
+          data-no="17" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left;"><br>
+          <pre style="font-size: 26px;"><code data-trim data-noescape class="language-python" data-line-numbers>
+          # 提示 1：寫一個函數 CalculateMedian(numbers)
+          # 這個函數應該：
+          # 1. 輸入一個整數列表 numbers
+          # 2. 將列表排序
+          # 3. 計算中位數
+          # 4. 回傳中位數（整數部分）
+          
+          def CalculateMedian(numbers):
+              # 先將數字排序
+              sorted_nums = sorted(numbers)
+              n = len(sorted_nums)
+              
+              # 如果個數為奇數
+              if n % 2 == 1:
+                  return sorted_nums[n // 2]  # 回傳中間的數
+              else:
+                  # 如果個數為偶數，取中間兩個數的平均值
+                  middle1 = sorted_nums[n // 2 - 1]
+                  middle2 = sorted_nums[n // 2]
+                  return (middle1 + middle2) // 2  # 整數除法（無條件捨去）
+          </code></pre>
+        </section>
+
+        <section data-auto-animate
+        data-no="17" 
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left;"><br>
+        <p style="font-size: 24px;"><b>提示 2：主程式的架構</b></p>
+        <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers>
+        def main():
+            numbers = []  # 用一個列表來存放所有讀入的數字
+            while True:
+                try:
+                    # 讀取輸入的整數
+                    x = int(input())
+                    # 將新的數字加入列表
+                    numbers.append(x)
+                    # 計算目前的中位數
+                    median = CalculateMedian(numbers)
+                    # 輸出中位數
+                    print(median)
+                except EOFError:
+                    # 當到達檔案結束時，停止程式
+                    break
+        </code></pre>
+        </section>
+
+        <section data-auto-animate
+        data-no="17" 
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left;"><br>
+        <p style="font-size: 24px;"><b>提示 3：測試你的 CalculateMedian 函數</b></p>
+        <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers>
+        # 測試幾個例子，確保你的函數正確
+        print(CalculateMedian([1]))              # 應該輸出 1
+        print(CalculateMedian([1, 3]))           # 應該輸出 2 (1+3)/2
+        print(CalculateMedian([1, 3, 4]))        # 應該輸出 3
+        print(CalculateMedian([1, 3, 4, 60]))    # 應該輸出 3 (3+4)/2
+        </code></pre>
+        </section>
+      </section>
+
+    <section>
+      <h3 >解答</h3>
+      <section data-auto-animate
+        data-no="8"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0">
+        <font size=6>主程式</font>
+        <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers class="language-python">
+        from collections import Counter
+        def main():
+            result,check_error_list = initInput()
+            result,check_error_list = Init(result,check_error_list)
+            if(CheckError(check_error_list)==1):
+                print("Error input")
+            elif(CheckSelfDuplicate(check_error_list)==1):
+                print("Duplicate deal")
+            else:
+                list1 = SortOrder(result)
+                result1 = GetCardsType(list1)
+                Result(result1)
+        </code></pre>
+      </section>
+    </section>
+
+    <section>
+      <h3 >解答</h3>
+      <section data-auto-animate
+      data-no="8"
+      data-positionx="0.8" 
+      data-positiony="0.03" 
+      data-scale="1" 
+      data-motionno="0"><br><br>
+      <font size=6>副程式-initinput():處理輸入的牌，並把A、B玩家的牌與牌桌上的牌做組合</font>
+      <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers="1-42|1-11|12-25|26-42" class="language-python">
+      def initInput():
+          result=[]
+          check_error_result=[] #用來放輸入的8張牌
+          list1=[] #用來放A、B先發的兩張牌
+          for i in range(2):
+              a=input() #輸入A、B玩家的各兩張牌
+              list_temp=a.split(" ")
+              list1.append(list_temp[0])
+              list1.append(list_temp[1])
+              check_error_result.append(list_temp[0])
+              check_error_result.append(list_temp[1])
+          a=input() #輸入牌桌的4張牌
+          list_temp=a.split(" ") #list_temp最後會放牌桌的四張牌
+          #這個雙層for迴圈會得到的是A、B各一張自己的牌配牌桌的四張牌
+          for i in range(4):
+              temp=[]
+              if(i < 2):
+                  temp.append("A")
+              else:
+                  temp.append("B")
+              temp.append(list1[i])
+              check_error_result.append(list_temp[i])
+              for j in list_temp:
+                  temp.append(j)
+              result.append(temp)
+          #這個三層for迴圈會得到A、B有兩張自己的牌+牌桌的牌取三張做組合
+          for i in range(2):
+              for j in range(4):
+                  temp=[]
+                  if(i==0):
+                      temp.append("A")
+                      temp.append(list1[0])
+                      temp.append(list1[1])
+                  else:
+                      temp.append("B")
+                      temp.append(list1[2])
+                      temp.append(list1[3])
+                  for k in range(4):
+                      if(k!=j):
+                          temp.append(list_temp[k])
+                  result.append(temp)
+          return result,check_error_result
+        </code></pre>
+      </section>
+
+      <section data-auto-animate
+        data-no="8"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"><br><br>
+        <p style="text-align: left;">假設輸入：D4 H9<br>&emsp;&emsp;&emsp;&emsp;&emsp;S9 C10<br>&emsp;&emsp;&emsp;&emsp;&emsp;H5 H6 H8 H7<br><br>
+        result: [['A', 'D4', 'H5', 'H6', 'H8', 'H7'], ['A', 'H9', 'H5', 'H6', 'H8', 'H7'], 
+        ['B', 'S9', 'H5', 'H6', 'H8', 'H7'], ['B', 'C10', 'H5', 'H6', 'H8', 'H7'], 
+        ['A', 'D4', 'H9', 'H6', 'H8', 'H7'], ['A', 'D4', 'H9', 'H5', 'H8', 'H7'], 
+        ['A', 'D4', 'H9', 'H5', 'H6', 'H7'], ['A', 'D4', 'H9', 'H5', 'H6', 'H8'], 
+        ['B', 'S9', 'C10', 'H6', 'H8', 'H7'], ['B', 'S9', 'C10', 'H5', 'H8', 'H7'], 
+        ['B', 'S9', 'C10', 'H5', 'H6', 'H7'], ['B', 'S9', 'C10', 'H5', 'H6', 'H8']]<br><br>
+        check_error_list: ['D4', 'H9', 'S9', 'C10', 'H5', 'H6', 'H8', 'H7']</p>
+      </section>
+
+      </section>
+
+      <section>
+        <h3 >解答</h3>
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>副程式：CalculateMedian() - 計算中位數</font>
+          <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          def CalculateMedian(numbers):
+              # 先將所有數字從小到大排序
+              sorted_nums = sorted(numbers)
+              n = len(sorted_nums)
+              
+              # 如果個數為奇數
+              if n % 2 == 1:
+                  # 中位數就是中間的那個數
+                  # n // 2 會找到正中間的索引
+                  return sorted_nums[n // 2]
+              else:
+                  # 如果個數為偶數，中位數是中間兩個數的平均值
+                  middle1 = sorted_nums[n // 2 - 1]  # 第一個中間數
+                  middle2 = sorted_nums[n // 2]      # 第二個中間數
+                  # 使用整數除法 // 來無條件捨去小數部分
+                  return (middle1 + middle2) // 2
+          </code></pre>
+        </section>
+
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>主程式：main() - 處理輸入和輸出</font>
+          <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          def main():
+              # 建立一個空列表來存放所有讀入的數字
+              numbers = []
+              
+              # 不斷讀取輸入直到檔案結束
+              while True:
+                  try:
+                      # 讀取一行輸入並轉換為整數
+                      x = int(input())
+                      # 將新的數字加入列表
+                      numbers.append(x)
+                      # 計算目前所有數字的中位數
+                      median = CalculateMedian(numbers)
+                      # 輸出目前的中位數
+                      print(median)
+                  except EOFError:
+                      # 當到達檔案結束時，停止程式
+                      break
+          </code></pre>
+        </section>
+
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>呼叫主程式</font>
+          <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          if __name__ == '__main__':
+              main()
+          </code></pre>
+        </section>
+
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>完整解答程式碼</font>
+          <pre style="font-size: 20px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          def CalculateMedian(numbers):
+              sorted_nums = sorted(numbers)
+              n = len(sorted_nums)
+              
+              if n % 2 == 1:
+                  return sorted_nums[n // 2]
+              else:
+                  middle1 = sorted_nums[n // 2 - 1]
+                  middle2 = sorted_nums[n // 2]
+                  return (middle1 + middle2) // 2
+
+          def main():
+              numbers = []
+              while True:
+                  try:
+                      x = int(input())
+                      numbers.append(x)
+                      median = CalculateMedian(numbers)
+                      print(median)
+                  except EOFError:
+                      break
+
+          if __name__ == '__main__':
+              main()
+          </code></pre>
+        </section>
+      </section>
+    </div>
+  </div>
+  <div id="pageIndex"></div>
+  <!-- reveal.js-->
+  <script src="vendor/reveal/reveal.js"></script>
+  <!--plugin-->
+  <script src="vendor/reveal/plugin/math/math.js"></script>
+  <script src="vendor/reveal/plugin/search/search.js"></script>
+  <script src="vendor/reveal/plugin/zoom/zoom.js"></script>
+
+  <script src="vendor/reveal/plugin/notes/notes.js"></script>
+  <script src="vendor/reveal/plugin/markdown/markdown.js"></script>
+  <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+  <script src="main-ppt.js"></script>
+</body>
+</html>

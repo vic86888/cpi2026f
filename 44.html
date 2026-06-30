@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1900">
+  <title>44 3n+1 Problem</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="vendor/reveal/theme/sky.css">
+
+  <!-- Theme used for syntax highlighted code -->
+  <link rel="stylesheet" href="vendor/reveal/plugin/highlight/zenburn.css"><!--edit-->
+  <!-- Pollyfill script -->
+  <script src="https://unpkg.com/core-js-bundle@3.6.1/minified.js"></script>
+  <!-- Live2DCubismCore script -->
+  <script src="./dist/live2dcubismcore.js"></script>
+  <!-- Build script -->
+  <script src="./dist/bundle.js"></script>
+  <style>
+    ul,
+    ol {
+        list-style: none;
+        margin-left: 0;
+    }
+
+    .reveal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 26px;
+    }
+
+    #pageIndex {
+        position: absolute;
+        right: 24px;
+        bottom: 24px;
+        background: #000;
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .controls {
+        bottom: 24px !important;
+    }
+    .table, .th, .td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 0px; 
+      width: 1100px;
+    }
+    
+    .pokerText {
+      text-align: center;
+      vertical-align:middle;
+    }
+
+    .pokerTable {
+      border: 1px solid black;
+      border-collapse: collapse;
+      width: 800px;
+    }
+
+    .pokerRow {
+      height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!--
+         data-no: 老師網頁的cubism人物編號(從0開始，網頁上的編號-1)
+         data-positionx: cubism人物水平位移範圍(建議-1 ~ 0.9)
+         data-positiony: cubism人物垂直位移範圍(建議-0.9~0.4)
+         data-scale: cubism人物縮放(建議1~2之間的小數值，最大極限是3)
+         data-motionno: cubism人物指定動作編號(從0開始，請參閱model3.json檔案的ALL MOTION GROUP)
+      -->
+
+      <!--Q1-->
+      <section>
+        <h3 style="text-align: left;">44 3n + 1 Problem</h3>
+        <section 
+        data-no="6"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left"><br><br>
+        <font size=5><b>3n + 1 問題（The 3n + 1 Problem）</b><br><br>
+        在電腦科學中，問題通常會被分類到不同的類別（例如 NP、不可解問題、遞迴問題等）。本題中，你將分析一個演算法的性質，而目前尚未知道它對所有可能的輸入是否都屬於哪一類。<br><br>
+        請考慮以下演算法：<br>
+        1. 輸入整數 n<br>
+        2. 輸出 n<br>
+        3. 如果 n = 1，則停止（STOP）<br>
+        4. 如果 n 是奇數，則令 n = 3n + 1<br>
+        5. 否則（n 是偶數），令 n = n / 2<br>
+        6. 回到步驟 2<br><br>
+        <b>例如</b>，當輸入為 22 時，會輸出以下數列：<br>
+        22 → 11 → 34 → 17 → 52 → 26 → 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1<br><br>
+        </font>
+        </section>
+
+        <section 
+        data-no="6"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left">
+        <p><b>關鍵概念：</b><br><br>
+        目前有一個猜想：<b>對於任何正整數作為輸入，這個演算法最後都會停止（也就是最終會輸出 1）</b>。 <br><br>
+        儘管這個演算法非常簡單，但至今仍未證明這個猜想是否正確。不過，目前已經驗證，所有滿足 0 < n < 1,000,000 的整數，都會使此演算法停止。<br><br>
+        對於一個輸入 n，從開始輸出到最後輸出 1（包含 1）為止，總共輸出的數字個數稱為 <b>cycle-length（循環長度）</b>。<br><br>
+        例如上面的例子，22 的 cycle-length 為 <b>16</b>。</p>
+        </section>
+
+        <section 
+        data-no="6"
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left">
+        <p><b>【你的任務】</b><br><br>
+        給定兩個整數 i 和 j，求出 <b>介於 i 和 j（包含兩端）所有整數之中，最大的 cycle-length</b>。<br><br>
+        <b>特別要求：</b><br>
+        1. 輸出的 i 和 j 必須保持與輸入時相同的順序<br>
+        2. 輸出三個數字：i、j 和最大 cycle-length，使用空白隔開<br>
+        </p>
+        <table class="table">
+            <tr>
+                <th class="th">輸入說明</th>
+                <th class="th">輸出說明</th>
+            </tr>
+            <tr>
+                <td class="td">輸入包含多組測試資料，每行包含一組兩個整數 i 和 j<br><br>
+                所有整數皆滿足：0 < i, j < 10000</td>
+                <td class="td">對於每組輸入，輸出一行：<br>
+                i   j   最大_cycle_length<br><br>
+                注意：輸出的 i 和 j 必須保持與輸入時相同的順序</td>   
+            </tr>
+        </table>
+        </section>
+      </section>
+
+      <section>
+        <h3>Input/Output</h3><br> 
+        <section data-auto-animate
+        data-no="6" 
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left"><br>
+        <p><b>範例輸入說明：</b></p>
+        <table class="table">
+            <tr>
+                <th class="th">Sample Input</th>
+                <th class="th">Sample Output</th>
+            </tr>
+            <tr>
+              <td class="td">1 10</td>
+              <td class="td">1 10 20</td>
+            </tr>
+            <tr>
+              <td class="td">100 200</td>
+              <td class="td">100 200 125</td>
+            </tr>
+            <tr>
+              <td class="td">201 210</td>
+              <td class="td">201 210 89</td>
+            </tr>
+            <tr>
+              <td class="td">900 1000</td>
+              <td class="td">900 1000 174</td>
+            </tr>
+          </table>
+        </section>
+
+        <section data-auto-animate
+          data-no="6" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left"><br>
+          <p><b>輸出範例說明 1：</b><br><br>
+          輸入：1 10<br>
+          計算範圍 [1, 10] 中所有整數的 cycle-length：<br><br>
+          n=1: 1 → cycle-length = 1<br>
+          n=2: 2 → 1 → cycle-length = 2<br>
+          n=3: 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1 → cycle-length = 8<br>
+          n=4: 4 → 2 → 1 → cycle-length = 3<br>
+          n=5: 5 → 16 → 8 → 4 → 2 → 1 → cycle-length = 6<br>
+          n=6: 6 → 3 → 10 → 5 → 16 → 8 → 4 → 2 → 1 → cycle-length = 9<br>
+          n=7: 7 → 22 → 11 → 34 → 17 → 52 → 26 → 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1 → cycle-length = 17<br>
+          n=8: 8 → 4 → 2 → 1 → cycle-length = 4<br>
+          n=9: 9 → 28 → 14 → 7 → ... → 1 → cycle-length = 20<br>
+          n=10: 10 → 5 → 16 → 8 → 4 → 2 → 1 → cycle-length = 7<br><br>
+          <b>最大的 cycle-length 為 20（來自 n=9），所以輸出：1 10 20</b></p>
+        </section>
+
+        <section data-auto-animate
+          data-no="6" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left"><br>
+          <p><b>輸出範例說明 2：</b><br><br>
+          輸入：100 200<br>
+          計算範圍 [100, 200] 中所有整數的 cycle-length，找出最大值為 125<br>
+          輸出：100 200 125<br><br>
+          
+          <b>輸出範例說明 3：</b><br><br>
+          輸入：201 210<br>
+          計算範圍 [201, 210] 中所有整數的 cycle-length，找出最大值為 89<br>
+          輸出：201 210 89</p>
+        </section>
+      </section>
+
+      <section>
+        <h3>Hints</h3>
+        <section data-auto-animate
+          data-no="17" 
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0"
+          style="text-align: left;"><br>
+          <pre style="font-size: 26px;"><code data-trim data-noescape class="language-python" data-line-numbers>
+          # 提示 1：寫一個函數 CalculateCycleLength(n)
+          # 這個函數應該：
+          # 1. 輸入一個正整數 n
+          # 2. 根據演算法反覆計算 n 的值
+          # 3. 計數有幾步（cycle-length）
+          # 4. 回傳這個 cycle-length
+          
+          def CalculateCycleLength(n):
+              count = 1  # 計數器，從 1 開始（因為要計算 n 本身）
+              while n != 1:
+                  if n % 2 == 1:  # 如果 n 是奇數
+                      n = 3 * n + 1
+                  else:  # 如果 n 是偶數
+                      n = n // 2
+                  count += 1  # 每次計算就加 1
+              return count
+          </code></pre>
+        </section>
+
+        <section data-auto-animate
+        data-no="17" 
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left;"><br>
+        <p style="font-size: 24px;"><b>提示 2：主程式的架構</b></p>
+        <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers>
+        def main():
+            while True:
+                try:
+                    # 讀取輸入的 i 和 j
+                    line = input()
+                    i, j = map(int, line.split())
+                    
+                    # 確定範圍的最小值和最大值（因為 i 可能比 j 大）
+                    min_val = min(i, j)
+                    max_val = max(i, j)
+                    
+                    # 找出範圍內所有數字的最大 cycle-length
+                    max_cycle_length = 0
+                    for n in range(min_val, max_val + 1):
+                        cycle_length = CalculateCycleLength(n)
+                        if cycle_length > max_cycle_length:
+                            max_cycle_length = cycle_length
+                    
+                    # 輸出結果（注意：i 和 j 要保持原本的順序）
+                    print(i, j, max_cycle_length)
+                except EOFError:
+                    break
+        </code></pre>
+        </section>
+
+        <section data-auto-animate
+        data-no="17" 
+        data-positionx="0.8" 
+        data-positiony="0.03" 
+        data-scale="1" 
+        data-motionno="0"
+        style="text-align: left;"><br>
+        <p style="font-size: 24px;"><b>提示 3：測試你的 CalculateCycleLength 函數</b></p>
+        <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers>
+        # 測試幾個例子，確保你的函數正確
+        print(CalculateCycleLength(1))    # 應該輸出 1
+        print(CalculateCycleLength(2))    # 應該輸出 2
+        print(CalculateCycleLength(3))    # 應該輸出 8
+        print(CalculateCycleLength(22))   # 應該輸出 16
+        print(CalculateCycleLength(9))    # 應該輸出 20
+        </code></pre>
+        </section>
+      </section>
+
+      <section>
+        <h3>解答</h3>
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>副程式：CalculateCycleLength() - 計算單一整數的 cycle-length</font>
+          <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          def CalculateCycleLength(n):
+              # count 用來記錄有幾個數字被輸出
+              count = 1
+              # 當 n 不等於 1 時，持續進行演算法
+              while n != 1:
+                  if n % 2 == 1:  # 檢查 n 是否為奇數（n 除以 2 的餘數是否為 1）
+                      n = 3 * n + 1  # 如果是奇數，執行 n = 3n + 1
+                  else:  # 否則 n 是偶數
+                      n = n // 2  # 執行 n = n / 2（使用整數除法）
+                  count += 1  # 每計算一次，cycle-length 就增加 1
+              return count  # 回傳最終的 cycle-length
+          </code></pre>
+        </section>
+
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>副程式：FindMaxCycleLength() - 找出範圍內的最大 cycle-length</font>
+          <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          def FindMaxCycleLength(i, j):
+              # 確定範圍的最小值和最大值
+              min_val = min(i, j)
+              max_val = max(i, j)
+              
+              # 初始化最大值為 0
+              max_cycle = 0
+              
+              # 遍歷範圍內的每個整數
+              for n in range(min_val, max_val + 1):
+                  # 計算當前整數的 cycle-length
+                  current_cycle = CalculateCycleLength(n)
+                  # 如果當前的 cycle-length 大於目前的最大值，更新最大值
+                  if current_cycle > max_cycle:
+                      max_cycle = current_cycle
+              
+              return max_cycle
+          </code></pre>
+        </section>
+
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>主程式：main() - 處理輸入和輸出</font>
+          <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          def main():
+              # 不斷讀取輸入直到檔案結束
+              while True:
+                  try:
+                      # 讀取一行輸入
+                      line = input()
+                      # 分割字串並轉換為整數
+                      i, j = map(int, line.split())
+                      
+                      # 找出範圍內的最大 cycle-length
+                      max_length = FindMaxCycleLength(i, j)
+                      
+                      # 輸出結果（i 和 j 保持原本的順序）
+                      print(i, j, max_length)
+                  except EOFError:
+                      # 當到達檔案結束時，停止程式
+                      break
+          </code></pre>
+        </section>
+
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>呼叫主程式</font>
+          <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          if __name__ == '__main__':
+              main()
+          </code></pre>
+        </section>
+
+        <section data-auto-animate
+          data-no="8"
+          data-positionx="0.8" 
+          data-positiony="0.03" 
+          data-scale="1" 
+          data-motionno="0">
+          <font size=6>完整解答程式碼</font>
+          <pre style="font-size: 20px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          def CalculateCycleLength(n):
+              count = 1
+              while n != 1:
+                  if n % 2 == 1:
+                      n = 3 * n + 1
+                  else:
+                      n = n // 2
+                  count += 1
+              return count
+
+          def FindMaxCycleLength(i, j):
+              min_val = min(i, j)
+              max_val = max(i, j)
+              max_cycle = 0
+              for n in range(min_val, max_val + 1):
+                  current_cycle = CalculateCycleLength(n)
+                  if current_cycle > max_cycle:
+                      max_cycle = current_cycle
+              return max_cycle
+
+          def main():
+              while True:
+                  try:
+                      line = input()
+                      i, j = map(int, line.split())
+                      max_length = FindMaxCycleLength(i, j)
+                      print(i, j, max_length)
+                  except EOFError:
+                      break
+
+          if __name__ == '__main__':
+              main()
+          </code></pre>
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <div id="pageIndex"></div>
+  <!-- reveal.js-->
+  <script src="vendor/reveal/reveal.js"></script>
+  <!--plugin-->
+  <script src="vendor/reveal/plugin/math/math.js"></script>
+  <script src="vendor/reveal/plugin/search/search.js"></script>
+  <script src="vendor/reveal/plugin/zoom/zoom.js"></script>
+
+  <script src="vendor/reveal/plugin/notes/notes.js"></script>
+  <script src="vendor/reveal/plugin/markdown/markdown.js"></script>
+  <script src="vendor/reveal/plugin/highlight/highlight.js"></script>
+  <script src="main-ppt.js"></script>
+</body>
+</html>
