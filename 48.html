@@ -50,6 +50,34 @@
     .controls {
         bottom: 24px !important;
     }
+
+    .reveal .slides section.slide-scrollable {
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      padding: 20px 30px;
+      max-height: 100vh;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .reveal .slides section.slide-scrollable p,
+    .reveal .slides section.slide-scrollable table,
+    .reveal .slides section.slide-scrollable ul,
+    .reveal .slides section.slide-scrollable ol {
+      margin-top: 0.4em;
+      margin-bottom: 0.4em;
+    }
+
+    .reveal .slides section.slide-scrollable .table,
+    .reveal .slides section.slide-scrollable .th,
+    .reveal .slides section.slide-scrollable .td {
+      width: 100%;
+      max-width: 1000px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
     .table, .th, .td {
       border: 1px solid black;
       border-collapse: collapse;
@@ -117,6 +145,7 @@
         data-positiony="0.03" 
         data-scale="1" 
         data-motionno="0"
+        class="slide-scrollable"
         style="text-align: left">
         <p><b>關鍵概念：</b><br><br>
         若資料個數為偶數，例如：{1, 3, 6, 2, 7, 8}<br>
