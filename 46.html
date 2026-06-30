@@ -154,50 +154,48 @@
             </section>
 
             <section>
-                <h3>解答</h3>
-                <section data-auto-animate
-                         data-no="8"
-                         data-positionx="0.8"
-                         data-positiony="0.03"
-                         data-scale="1"
-                         data-motionno="0"
-                         style="text-align: left;">
-                    <font size="6">主程式</font>
-                    <pre style="font-size: 22px;"><code data-trim data-noescape data-line-numbers class="language-python">
-                    import sys
+				<h3>解答</h3>
+				<section data-auto-animate
+						 data-no="8"
+						 data-positionx="0.8"
+						 data-positiony="0.03"
+						 data-scale="1"
+						 data-motionno="0"
+						 style="text-align: left;">
+					<font size="6">主程式</font>
+					<pre style="font-size: 22px;"><code data-trim data-noescape data-line-numbers class="language-python">
+					def solve():
+						# 1. 讀取陣列大小 N
+						line = input().strip() # 讀取一行並去除頭尾多餘的空白
+						if not line:
+							return # 如果不小心直接按了 Enter，就結束程式
+						n = int(line)
+						
+						a = []
+						# 2. 持續讀取數字，直到陣列 a 裡面剛好裝滿 n 個數字為止
+						# 注意：小於符號需寫成 &lt; 以避免網頁跑版
+						while len(a) &lt; n:
+							elements = input().split() # 把輸入的一行文字用空格切開
+							for x in elements:
+								a.append(int(x)) # 把切開的數字一個一個轉成整數並放入陣列
+								
+						# 3. 開始計算逆序對
+						ans = 0
+						for i in range(n):
+							# 內層迴圈從 i 的下一個位置開始找
+							for j in range(i + 1, n):
+								# 若前面的數字大於後面的數字 (大於符號需寫成 &gt;)，翻轉次數就加一
+								if a[i] &gt; a[j]:
+									ans += 1
+									
+						# 4. 輸出結果
+						print(f"Minimum exchange operations : {ans}")
 
-                    def solve():
-                        # 讀取所有輸入內容，變成數字牌堆
-                        data = sys.stdin.read().split()
-
-                        # 只要牌堆裡面還有數字就繼續
-                        while len(data) &gt; 0:
-                            # 抽出 1 個數字當作陣列大小 N
-                            n = int(data.pop(0))
-                            
-                            a = []
-                            # 抽出 N 個數字裝進陣列
-                            for _ in range(n):
-                                a.append(int(data.pop(0)))
-                                
-                            # 開始計算每筆測資前重置翻轉次數
-                            ans = 0
-                            
-                            # 雙層迴圈計算逆序對
-                            for i in range(n):
-                                for j in range(i + 1, n):
-                                    # 若前面的數字大於後面的數字，次數加一
-                                    if a[i] &gt; a[j]:
-                                        ans += 1
-                                        
-                            # 輸出結果
-                            print(f"Minimum exchange operations : {ans}")
-
-                    if __name__ == '__main__':
-                        solve()
-                    </code></pre>
-                </section>
-            </section>
+					if __name__ == '__main__':
+						solve()
+					</code></pre>
+				</section>
+			</section>
 			
         </div>
     </div>
