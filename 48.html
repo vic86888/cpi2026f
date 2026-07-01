@@ -138,43 +138,52 @@
         右邊：{6, 7}<br><br>
         </font>
         </section>
+<section 
+    data-no="6"
+    data-positionx="0.8" 
+    data-positiony="0.08"
+    data-scale="1" 
+    data-motionno="0"
+    class="slide-scrollable"
+    style="text-align:left; padding-top: 40px;"> <p>
+        <b>關鍵概念：</b><br><br>
 
-        <section 
-        data-no="6"
-        data-positionx="0.8" 
-        data-positiony="0.03" 
-        data-scale="1" 
-        data-motionno="0"
-        class="slide-scrollable"
-        style="text-align: left">
-        <p><b>關鍵概念：</b><br><br>
         若資料個數為偶數，例如：{1, 3, 6, 2, 7, 8}<br>
         排序後為：{1, 2, 3, 6, 7, 8}<br><br>
+
         由於沒有單一一個數能將資料平分，因此中位數定義為中間兩個數的平均值：<br>
         <b>(3 + 6) / 2 = 4.5</b><br><br>
         <b>但本題只需要輸出整數部分，不保留小數。</b><br>
         因此，本題中的中位數為：<b>4</b><br><br>
         <b>【你的任務】</b><br>
         每讀入一個整數，就立即輸出目前所有已讀入數字的中位數。<br>
-        也就是說：讀入第 1 個數後輸出一次、讀入第 2 個數後再輸出一次…… 每新增一個數，都要重新計算並輸出目前的中位數。
-        </p>
-        <table class="table">
-            <tr>
-                <th class="th">輸入說明</th>
-                <th class="th">輸出說明</th>
-            </tr>
-            <tr>
-                <td class="td">輸入包含一連串整數 X，每行一個<br><br>
-                範圍：0 ≤ X < 2³¹<br>
+        也就是說：讀入第 1 個數後輸出一次、讀入第 2 個數後再輸出一次……
+        每新增一個數，都要重新計算並輸出目前的中位數。
+    </p>
+
+    <table class="table" style="width: 100%; table-layout: fixed;">
+        <tr>
+            <th class="th" style="width: 50%;">輸入說明</th>
+            <th class="th" style="width: 50%;">輸出說明</th>
+        </tr>
+
+        <tr>
+            <td class="td" style="padding:12px 15px; text-align:left; vertical-align:top; line-height:1.6; word-wrap: break-word;">
+                輸入包含一連串整數 X，每行一個<br><br>
+                範圍：0 ≤ X &lt; 2³¹<br>
                 總共輸入的整數數量 N 小於 10000<br>
-                每個數字前後可能包含空白字元</td>
-                <td class="td">每讀入一個整數，就輸出一行<br>
+                每個數字前後可能包含空白字元
+            </td>
+
+            <td class="td" style="padding:12px 15px; text-align:left; vertical-align:top; line-height:1.6; word-wrap: break-word;">
+                每讀入一個整數，就輸出一行<br>
                 輸出目前所有已讀入數字的中位數<br>
-                若數量為偶數，取中間兩個數的平均值，只輸出整數部分（無條件捨去）</td>   
-            </tr>
-        </table>
-        </section>
-      </section>
+                若數量為偶數，取中間兩個數的平均值，只輸出整數部分（無條件捨去）
+            </td>
+        </tr>
+    </table>
+
+</section>
 
       <section>
         <h3>Input/Output</h3><br> 
