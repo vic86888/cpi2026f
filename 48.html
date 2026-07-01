@@ -244,20 +244,17 @@
           # 2. 將列表排序
           # 3. 計算中位數
           # 4. 回傳中位數（整數部分）
-          
+
           def CalculateMedian(numbers):
-              # 先將數字排序
               sorted_nums = sorted(numbers)
               n = len(sorted_nums)
-              
-              # 如果個數為奇數
+
               if n % 2 == 1:
-                  return sorted_nums[n // 2]  # 回傳中間的數
+                  return sorted_nums[n // 2]
               else:
-                  # 如果個數為偶數，取中間兩個數的平均值
                   middle1 = sorted_nums[n // 2 - 1]
                   middle2 = sorted_nums[n // 2]
-                  return (middle1 + middle2) // 2  # 整數除法（無條件捨去）
+                  return (middle1 + middle2) // 2
           </code></pre>
         </section>
 
@@ -300,116 +297,17 @@
         style="text-align: left;"><br>
         <p style="font-size: 24px;"><b>提示 3：測試你的 CalculateMedian 函數</b></p>
         <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers>
-        # 測試幾個例子，確保你的函數正確
-        print(CalculateMedian([1]))              # 應該輸出 1
-        print(CalculateMedian([1, 3]))           # 應該輸出 2 (1+3)/2
-        print(CalculateMedian([1, 3, 4]))        # 應該輸出 3
-        print(CalculateMedian([1, 3, 4, 60]))    # 應該輸出 3 (3+4)/2
+        # 測試幾個例子
+        print(CalculateMedian([1]))              # 1
+        print(CalculateMedian([1, 3]))           # 2
+        print(CalculateMedian([1, 3, 4]))        # 3
+        print(CalculateMedian([1, 3, 4, 60]))    # 3
         </code></pre>
         </section>
       </section>
 
-    <section>
-      <h3 >解答</h3>
-      <section data-auto-animate
-        data-no="8"
-        data-positionx="0.8" 
-        data-positiony="0.03" 
-        data-scale="1" 
-        data-motionno="0">
-        <font size=6>主程式</font>
-        <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers class="language-python">
-        from collections import Counter
-        def main():
-            result,check_error_list = initInput()
-            result,check_error_list = Init(result,check_error_list)
-            if(CheckError(check_error_list)==1):
-                print("Error input")
-            elif(CheckSelfDuplicate(check_error_list)==1):
-                print("Duplicate deal")
-            else:
-                list1 = SortOrder(result)
-                result1 = GetCardsType(list1)
-                Result(result1)
-        </code></pre>
-      </section>
-    </section>
-
-    <section>
-      <h3 >解答</h3>
-      <section data-auto-animate
-      data-no="8"
-      data-positionx="0.8" 
-      data-positiony="0.03" 
-      data-scale="1" 
-      data-motionno="0"><br><br>
-      <font size=6>副程式-initinput():處理輸入的牌，並把A、B玩家的牌與牌桌上的牌做組合</font>
-      <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers="1-42|1-11|12-25|26-42" class="language-python">
-      def initInput():
-          result=[]
-          check_error_result=[] #用來放輸入的8張牌
-          list1=[] #用來放A、B先發的兩張牌
-          for i in range(2):
-              a=input() #輸入A、B玩家的各兩張牌
-              list_temp=a.split(" ")
-              list1.append(list_temp[0])
-              list1.append(list_temp[1])
-              check_error_result.append(list_temp[0])
-              check_error_result.append(list_temp[1])
-          a=input() #輸入牌桌的4張牌
-          list_temp=a.split(" ") #list_temp最後會放牌桌的四張牌
-          #這個雙層for迴圈會得到的是A、B各一張自己的牌配牌桌的四張牌
-          for i in range(4):
-              temp=[]
-              if(i < 2):
-                  temp.append("A")
-              else:
-                  temp.append("B")
-              temp.append(list1[i])
-              check_error_result.append(list_temp[i])
-              for j in list_temp:
-                  temp.append(j)
-              result.append(temp)
-          #這個三層for迴圈會得到A、B有兩張自己的牌+牌桌的牌取三張做組合
-          for i in range(2):
-              for j in range(4):
-                  temp=[]
-                  if(i==0):
-                      temp.append("A")
-                      temp.append(list1[0])
-                      temp.append(list1[1])
-                  else:
-                      temp.append("B")
-                      temp.append(list1[2])
-                      temp.append(list1[3])
-                  for k in range(4):
-                      if(k!=j):
-                          temp.append(list_temp[k])
-                  result.append(temp)
-          return result,check_error_result
-        </code></pre>
-      </section>
-
-      <section data-auto-animate
-        data-no="8"
-        data-positionx="0.8" 
-        data-positiony="0.03" 
-        data-scale="1" 
-        data-motionno="0"><br><br>
-        <p style="text-align: left;">假設輸入：D4 H9<br>&emsp;&emsp;&emsp;&emsp;&emsp;S9 C10<br>&emsp;&emsp;&emsp;&emsp;&emsp;H5 H6 H8 H7<br><br>
-        result: [['A', 'D4', 'H5', 'H6', 'H8', 'H7'], ['A', 'H9', 'H5', 'H6', 'H8', 'H7'], 
-        ['B', 'S9', 'H5', 'H6', 'H8', 'H7'], ['B', 'C10', 'H5', 'H6', 'H8', 'H7'], 
-        ['A', 'D4', 'H9', 'H6', 'H8', 'H7'], ['A', 'D4', 'H9', 'H5', 'H8', 'H7'], 
-        ['A', 'D4', 'H9', 'H5', 'H6', 'H7'], ['A', 'D4', 'H9', 'H5', 'H6', 'H8'], 
-        ['B', 'S9', 'C10', 'H6', 'H8', 'H7'], ['B', 'S9', 'C10', 'H5', 'H8', 'H7'], 
-        ['B', 'S9', 'C10', 'H5', 'H6', 'H7'], ['B', 'S9', 'C10', 'H5', 'H6', 'H8']]<br><br>
-        check_error_list: ['D4', 'H9', 'S9', 'C10', 'H5', 'H6', 'H8', 'H7']</p>
-      </section>
-
-      </section>
-
       <section>
-        <h3 >解答</h3>
+        <h3>解答</h3>
         <section data-auto-animate
           data-no="8"
           data-positionx="0.8" 
@@ -419,20 +317,14 @@
           <font size=6>副程式：CalculateMedian() - 計算中位數</font>
           <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
           def CalculateMedian(numbers):
-              # 先將所有數字從小到大排序
               sorted_nums = sorted(numbers)
               n = len(sorted_nums)
-              
-              # 如果個數為奇數
+
               if n % 2 == 1:
-                  # 中位數就是中間的那個數
-                  # n // 2 會找到正中間的索引
                   return sorted_nums[n // 2]
               else:
-                  # 如果個數為偶數，中位數是中間兩個數的平均值
-                  middle1 = sorted_nums[n // 2 - 1]  # 第一個中間數
-                  middle2 = sorted_nums[n // 2]      # 第二個中間數
-                  # 使用整數除法 // 來無條件捨去小數部分
+                  middle1 = sorted_nums[n // 2 - 1]
+                  middle2 = sorted_nums[n // 2]
                   return (middle1 + middle2) // 2
           </code></pre>
         </section>
@@ -443,7 +335,7 @@
           data-positiony="0.03" 
           data-scale="1" 
           data-motionno="0">
-          <font size=6>主程式：main() - 處理輸入和輸出</font>
+          <font size=6>主程式：main() - 處理輸入與輸出</font>
           <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
           def main():
               numbers = []
@@ -463,19 +355,6 @@
 
               for ans in answers:
                   print(ans)
-          </code></pre>
-        </section>
-
-        <section data-auto-animate
-          data-no="8"
-          data-positionx="0.8" 
-          data-positiony="0.03" 
-          data-scale="1" 
-          data-motionno="0">
-          <font size=6>呼叫主程式</font>
-          <pre style="font-size: 26px;"><code data-trim data-noescape data-line-numbers class="language-python">
-          if __name__ == '__main__':
-              main()
           </code></pre>
         </section>
 
