@@ -53,10 +53,6 @@
       padding: 0px;
       width: 1100px;
     }
-	/* 強制讓程式碼區塊裡的一般文字變成淺色，避免被簡報主題的黑色覆蓋 */
-    .reveal pre code {
-      color: #dcdcdc !important;
-    }
   </style>
 </head>
 
@@ -215,7 +211,7 @@
 
         <section data-auto-animate data-no="8" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0" style="text-align: left">
           <font size=6>主程式：main() - 讀入資料並輸出中位數</font>
-          <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python">
+          <pre style="font-size: 24px;"><code data-trim data-noescape data-line-numbers class="language-python">
           def main():
               numbers = []
 
