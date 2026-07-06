@@ -67,53 +67,85 @@
             font-size: 20px;
         }
 
-        /* 程式碼區：不要白色背景，直接顯示在投影片背景上 */
-        .reveal pre,
-        .reveal pre code,
-        .reveal pre code.hljs,
-        .hljs {
-            background: transparent !important;
-        }
-
+        /* 程式碼區：VS Code 深色背景 */
         .reveal pre {
-            box-shadow: none !important;
-            border: none !important;
+            background: #1e1e1e !important;
+            border: 1px solid #3c3c3c !important;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35) !important;
         }
 
-        /* 無背景時，改用適合淺色投影片背景的程式碼顏色 */
         .reveal pre code,
         .reveal pre code.hljs,
         .hljs {
-            color: #333333 !important;
+            background: #1e1e1e !important;
+            color: #d4d4d4 !important;
         }
 
+        .reveal pre code {
+            padding: 14px 18px !important;
+        }
+
+        /* 行號顏色 */
+        .hljs-ln-numbers,
+        .reveal .hljs-ln-numbers,
+        .reveal pre code .hljs-ln-numbers {
+            color: #858585 !important;
+        }
+
+        /* VS Code Dark+ 類似配色 */
         .hljs-keyword,
         .hljs-selector-tag,
-        .hljs-title,
         .hljs-name {
-            color: #9b870c !important;
+            color: #569cd6 !important;
+        }
+
+        .hljs-title,
+        .hljs-function .hljs-title {
+            color: #dcdcaa !important;
         }
 
         .hljs-built_in,
         .hljs-type,
-        .hljs-function {
-            color: #6f42c1 !important;
+        .hljs-class .hljs-title {
+            color: #4ec9b0 !important;
         }
 
         .hljs-string,
         .hljs-meta .hljs-string {
-            color: #2e7d32 !important;
+            color: #ce9178 !important;
         }
 
         .hljs-number,
         .hljs-literal {
-            color: #0086b3 !important;
+            color: #b5cea8 !important;
         }
 
         .hljs-comment,
         .hljs-quote {
             color: #6a9955 !important;
         }
+
+        .hljs-variable,
+        .hljs-params,
+        .hljs-attr {
+            color: #9cdcfe !important;
+        }
+
+        /* 程式碼區捲軸 */
+        .reveal pre::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+
+        .reveal pre::-webkit-scrollbar-track {
+            background: #252526;
+        }
+
+        .reveal pre::-webkit-scrollbar-thumb {
+            background: #6b6b6b;
+            border-radius: 8px;
+        }
+
     </style>
 </head>
 
