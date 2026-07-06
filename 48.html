@@ -272,12 +272,17 @@
                     </p>
                 </section>
             </section>
-
-            <section>
-                <h3>Hints</h3>
-
-                <section data-auto-animate data-no="17" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0" style="text-align: left;"><br>
-                    <pre style="font-size: 26px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-5">
+			
+			<section>
+                <section data-auto-animate
+                         data-no="17"
+                         data-positionx="0.8"
+                         data-positiony="0.03"
+                         data-scale="1"
+                         data-motionno="0"
+                         style="text-align: left;">
+                    <h3>Hints</h3>
+                    <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-23">
                     # 提示 1：先把所有讀到的數字存到一個串列裡
                     # 每次加入一個數字後，就先排序
                     # 再根據數量的奇偶決定中位數怎麼計算
@@ -286,22 +291,62 @@
                     </code></pre>
                 </section>
 
-                <section data-auto-animate data-no="17" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0" style="text-align: left;"><br>
-                    <p style="font-size: 24px;"><b>提示 2：計算中位數的想法</b></p>
-                    <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-11">
-                    def CalculateMedian(numbers):
-                        numbers.sort()  # 先把數字從小到大排序
-                        length = len(numbers)
+                <section data-auto-animate
+                         data-no="17"
+                         data-positionx="0.8"
+                         data-positiony="0.03"
+                         data-scale="1"
+                         data-motionno="0"
+                         style="text-align: left;">
+                    <h3>set() 集合</h3>
+                    <br>
+                    <p style="font-size: 26px;">
+                        <code>set()</code> 就像是一個<b>「不能放重複物品的百寶袋」</b>。<br>
+                        在快樂數這題，我們用它來記錄數字變化時踩過的「足跡」。
+                    </p>
+                    <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-23">
+                    seen = set() # 建立一個空的集合
+                    
+                    seen.add(4)
+                    seen.add(16)
+                    seen.add(4)  # 試圖放入重複的數字會被自動無視！
 
-                        if length % 2 == 1:
-                            return numbers[length // 2]
-                        else:
-                            left = numbers[length // 2 - 1]
-                            right = numbers[length // 2]
-                            # 只要整數部分，無條件捨去
-                            return (left + right) // 2
+                    print(seen)  # 結果會是 {4, 16}
+
+                    # 檢查數字有沒有在裡面，速度極快！
+                    if 16 in seen:
+                        print("16 已經出現過囉！")
                     </code></pre>
                 </section>
+
+                <section data-auto-animate
+                         data-no="17"
+                         data-positionx="0.8"
+                         data-positiony="0.03"
+                         data-scale="1"
+                         data-motionno="0"
+                         style="text-align: left;">
+                    <h3>生成器運算式</h3>
+                    <br>
+                    <p style="font-size: 26px;">
+                        程式碼：<code>n = sum(int(digit)**2 for digit in str(n))</code><br>
+                        這個寫法叫做「生成器運算式」，其實它就是把以下四行程式碼縮寫成一行：
+                    </p>
+                    <pre style="font-size: 24px;"><code data-trim data-noescape class="language-python" data-line-numbers="1-23">
+                    n = 49
+                    total = 0
+
+                    # str(n) 會把 49 變成字串 "49"，然後迴圈會分別拿出 '4' 和 '9'
+                    for digit in str(n):
+                        number = int(digit)    # 轉回整數 4 
+                        total += number ** 2   # 計算 4 的平方(16) 並加到總和裡
+                        
+                    n = total # 最後 n 變成 97
+                    </code></pre>
+                </section>
+            </section>
+
+            
 
                 <section data-auto-animate data-no="17" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0" style="text-align: left;"><br>
                     <p style="font-size: 24px;"><b>提示 3：主程式的架構</b></p>
