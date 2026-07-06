@@ -67,15 +67,52 @@
             font-size: 20px;
         }
 
-        /* 防止程式碼區文字被其他 CSS 蓋成黑色 */
+        /* 程式碼區：不要白色背景，直接顯示在投影片背景上 */
+        .reveal pre,
         .reveal pre code,
         .reveal pre code.hljs,
         .hljs {
-            color: #dcdcdc !important;
+            background: transparent !important;
         }
 
         .reveal pre {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /* 無背景時，改用適合淺色投影片背景的程式碼顏色 */
+        .reveal pre code,
+        .reveal pre code.hljs,
+        .hljs {
+            color: #333333 !important;
+        }
+
+        .hljs-keyword,
+        .hljs-selector-tag,
+        .hljs-title,
+        .hljs-name {
+            color: #9b870c !important;
+        }
+
+        .hljs-built_in,
+        .hljs-type,
+        .hljs-function {
+            color: #6f42c1 !important;
+        }
+
+        .hljs-string,
+        .hljs-meta .hljs-string {
+            color: #2e7d32 !important;
+        }
+
+        .hljs-number,
+        .hljs-literal {
+            color: #0086b3 !important;
+        }
+
+        .hljs-comment,
+        .hljs-quote {
+            color: #6a9955 !important;
         }
     </style>
 </head>
