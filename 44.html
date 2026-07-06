@@ -311,6 +311,57 @@
         </code></pre>
         </section>
       </section>
+	  
+	  <section>
+        <h3>解答 (簡單版)</h3>
+        <section data-auto-animate
+                 data-no="8"
+                 data-positionx="0.8"
+                 data-positiony="0.03"
+                 data-scale="1"
+                 data-motionno="0"
+                 style="text-align: left;">
+          <font size="6">完整解答程式碼</font>
+          <pre style="font-size: 20px;"><code data-trim data-noescape data-line-numbers class="language-python">
+          def CalculateCycleLength(n):
+              on = n
+              length = 1
+              while n != 1:
+                  if n % 2 == 1:
+                      n = 3 * n + 1
+                  else:
+                      n = n // 2  # 使用 // 確保是整數除法
+                  length += 1
+              print(f'{on} length:{length}')
+              return length
+           
+          def FindMaxCycleLength(i, j):
+              max_cycle = 0
+              for n in range(i, j + 1):
+                  current_cycle = CalculateCycleLength(n)
+                  if current_cycle &gt; max_cycle:
+                      max_cycle = current_cycle
+                  print(f'   max_cycle:{max_cycle}')
+              return max_cycle
+           
+          def main():
+              data = []
+           
+              while True:
+                  i, j = map(int, input().split())
+                  
+                  if i == 0 and j == 0:
+                      break
+
+                  data.append((i, j))
+           
+              for i, j in data:
+                  print(i, j, FindMaxCycleLength(i, j))
+           
+          main()
+          </code></pre>
+        </section>
+      </section>
 
       <section>
         <h3>解答</h3>
