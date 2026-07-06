@@ -228,35 +228,25 @@
         <section data-auto-animate data-no="8" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0" style="text-align: left">
           <font size=6>完整解答程式碼</font>
           <pre style="font-size: 20px;"><code data-trim data-noescape data-line-numbers class="language-python">
-          def calculate_median(numbers):
-              # 先把數字從小到大排序
+          def CalculateMedian(numbers):
               numbers.sort()
               length = len(numbers)
 
-              # 判斷陣列長度是奇數還是偶數
               if length % 2 == 1:
-                  # 若為奇數個，直接取正中央那一個數字
                   return numbers[length // 2]
               else:
-                  # 若為偶數個，取中間兩個數字相加的平均值 (無條件捨去小數)
                   left = numbers[length // 2 - 1]
                   right = numbers[length // 2]
                   return (left + right) // 2
 
           def main():
-              # 1. 準備一個空的陣列
               numbers = []
-              
-              # 2. 持續讀取數字，直到遇到檔案結束 (EOF) 為止
               while True:
                   try:
-                      n = int(input().strip()) # 讀取輸入並轉為整數
-                      numbers.append(n)        # 將數字加入陣列中
-                      
-                      # 3. 呼叫函式計算，並印出目前的中位數
-                      print(calculate_median(numbers))
+                      n = int(input())
+                      numbers.append(n)
+                      print(CalculateMedian(numbers))
                   except EOFError:
-                      # 讀取完畢，結束迴圈
                       break
 
           if __name__ == '__main__':
