@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -20,38 +20,83 @@
   <script src="./dist/live2dcubismcore.js"></script>
   <script src="./dist/bundle.js"></script>
   <style>
-        ul,
-        ol {
-            list-style: none;
-            margin-left: 0;
-        }
+    ul,
+    ol {
+      list-style: none;
+      margin-left: 0;
+    }
 
-        .reveal {
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 26px;
-        }
+    .reveal {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      font-size: 26px;
+      overflow: hidden;
+    }
 
-        #pageIndex {
-            position: absolute;
-            right: 24px;
-            bottom: 24px;
-            background: #000;
-            color: #fff;
-            font-size: 20px;
-        }
+    .reveal .slides {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
 
-        .controls {
-            bottom: 24px !important;
-        }
+    #pageIndex {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      background: #000;
+      color: #fff;
+      font-size: 20px;
+    }
 
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-    </style>
+    .controls {
+      bottom: 24px !important;
+    }
+
+    .reveal .slides > section {
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      padding: 20px 30px;
+      max-height: 100vh;
+      min-height: 0;
+      height: auto;
+      font-size: 22px;
+      line-height: 1.25;
+      word-wrap: break-word;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      touch-action: pan-y;
+    }
+
+    .reveal .slides > section p,
+    .reveal .slides > section table,
+    .reveal .slides > section ul,
+    .reveal .slides > section ol {
+      margin-top: 0.4em;
+      margin-bottom: 0.4em;
+    }
+
+    .reveal .slides > section .table,
+    .reveal .slides > section .th,
+    .reveal .slides > section .td {
+      width: 100%;
+      max-width: 1000px;
+      font-size: 20px;
+      line-height: 1.25;
+      word-wrap: break-word;
+      table-layout: fixed;
+    }
+
+    .table, .th, .td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 0px;
+      width: 1100px;
+    }
+  </style>
 </head>
 
 <body>
@@ -83,12 +128,8 @@
           &gt; (3 + 6) / 2 = 4.5<br><br>
           但本題只需要輸出<b>整數部分</b>，不需要小數部分。<br><br>
           因此：<br>
-          &gt; 中位數輸出為 <b>4</b><br>
+          &gt; 中位數輸出為 <b>4</b><br><br>
           </p>
-        </section>
-
-        <section data-no="6" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0" style="text-align: left">
-          <br><p><b>【輸入與輸出說明】</b></p>
           <table class="table">
             <tr>
               <th class="th">輸入說明</th>
@@ -96,7 +137,7 @@
             </tr>
             <tr>
               <td class="td">輸入檔包含一連串整數 X，每行一個。<br><br>
-              0 ≤ X &lt; 2³¹<br>
+              0 ≤ X < 2³¹<br>
               總共輸入的整數個數 N 小於 10000。<br>
               每個數字前後可能有空白。</td>
               <td class="td">每讀入一個整數後，都要輸出目前所有已讀入數字的中位數。<br>
@@ -116,7 +157,7 @@
               <th class="th">Sample Output</th>
             </tr>
             <tr>
-              <td class="td">1<br>3<br>4<br>6<br>0<br>7<br>0<br>5<br>0<br>2</td>
+              <td class="td">1<br>3<br>4<br>60<br>70<br>50<br>2</td>
               <td class="td">1<br>2<br>3<br>3<br>4<br>27<br>4</td>
             </tr>
           </table>
@@ -127,15 +168,12 @@
           每次加入一個數字後，先把數字排序，再找中間的中位數。<br><br>
           | 已讀入的數字 | 排序後 | 中位數 |<br>
           | 1 | 1 | 1 |<br>
-          | 1, 3 | 1 3 | (1+3)/2 = 2 |<br>
-          | 1, 3, 4 | 1 3 4 | 3 |<br>
-          | 1, 3, 4, 6 | 1 3 4 6 | (3+4)/2 = 3 |<br>
-          | 1, 3, 4, 6, 0 | 0 1 3 4 6 | 3 |<br>
-          | 1, 3, 4, 6, 0, 7 | 0 1 3 4 6 7 | (3+4)/2 = 3 |<br>
-          | 1, 3, 4, 6, 0, 7, 0 | 0 0 1 3 4 6 7 | 3 |<br>
-          | 1, 3, 4, 6, 0, 7, 0, 5 | 0 0 1 3 4 5 6 7 | (3+4)/2 = 3 |<br>
-          | 1, 3, 4, 6, 0, 7, 0, 5, 0 | 0 0 0 1 3 4 5 6 7 | 3 |<br>
-          | 1, 3, 4, 6, 0, 7, 0, 5, 0, 2 | 0 0 0 1 2 3 4 5 6 7 | (2+3)/2 = 2 |<br><br>
+          | 3 | 1 3 | (1+3)/2 = 2 |<br>
+          | 4 | 1 3 4 | 3 |<br>
+          | 60 | 1 3 4 60 | (3+4)/2 = 3 |<br>
+          | 70 | 1 3 4 60 70 | 4 |  <br>
+          | 50 | 1 3 4 50 60 70 | (4+50)/2 = 27 |<br>
+          | 2 | 1 2 3 4 50 60 70 | 4 |<br>
           <b>所以輸出結果依序為：1, 2, 3, 3, 4, 27, 4</b></p>
         </section>
       </section>
