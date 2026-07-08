@@ -345,6 +345,109 @@
                     </section>
                 </section>
             </section>
+			
+		  <section>
+			<h3>解答(for迴圈版)</h3>
+			<section
+				data-no="8"
+				data-positionx="0.8" 
+				data-positiony="0.03" 
+				data-scale="1" 
+				data-motionno="0"
+				style="text-align: left"><br><br>
+				<section data-auto-animate>
+					<pre><code data-trim data-noescape data-line-numbers="|52-77|">
+						#Spare判斷
+						def spare(ball1,ball2):
+						  if(ball1+ball2)==10:
+							return True
+						  return False
+						 
+						#Strike判斷
+						def strike(ball):
+						  if ball==10:
+							return True
+						  return False
+						 
+						#玩一局
+						def oneround():
+						  score=0
+						  ball1=int(input())
+						  score+=ball1
+						  if strike(ball1):
+							return 2,ball1,-1,score
+						  ball2=int(input())
+						  score+=ball2
+						  if spare(ball1,ball2):
+							return 1,ball1,ball2,score
+						  return 0,ball1,ball2,score
+
+						#額外投球機會
+						def bonustime(roun10_state):
+						  if roun10_state==1:
+							ball1=int(input())
+							return ball1,-1
+						  elif roun10_state==2:
+							ball1=int(input())
+							ball2=int(input())
+							return ball1,ball2
+						  return 0,0
+						 
+						#額外加分
+						def addAnotherPoint(ball1,ball2,remainTime,addedround_point):
+						  if(ball2==-1):
+							if(remainTime&gt;0):
+							  addedround_remainaddedtime,addedround_score= remainTime-1,ball1+addedround_point
+							else:
+							  addedround_remainaddedtime,addedround_score=0,addedround_point
+						  else:
+							if(remainTime==2):
+							  addedround_remainaddedtime,addedround_score= 0,ball1+ball2+addedround_point
+							elif(remainTime==1):
+							  addedround_remainaddedtime,addedround_score= 0,ball1+addedround_point
+							else:
+							  addedround_remainaddedtime,addedround_score=0,addedround_point
+						  return addedround_remainaddedtime,addedround_score
+						
+						def startGame():
+						  # 初始化：我們只需要 10 個局數的空間即可
+						  all_state = [0] * 10
+						  all_score = [0] * 10
+						  
+						  # 利用迴圈處理第 1 到 10 局 (陣列 index 為 0 ~ 9)
+						  for i in range(10):
+							all_state[i], ball1, ball2, all_score[i] = oneround()
+							
+							# 更新前一局的額外加分
+							if i &gt;= 1:
+							  all_state[i-1], all_score[i-1] = addAnotherPoint(ball1, ball2, all_state[i-1], all_score[i-1])
+							  
+							# 更新前兩局的額外加分 (處理連續兩局 Strike 的情況)
+							if i &gt;= 2:
+							  all_state[i-2], all_score[i-2] = addAnotherPoint(ball1, ball2, all_state[i-2], all_score[i-2])
+						
+						  # 第十局的額外投球機會 (離開迴圈後單獨處理)
+						  ball1, ball2 = bonustime(all_state[9])
+						  
+						  # 第十局本身的額外加分
+						  all_state[9], all_score[9] = addAnotherPoint(ball1, ball2, all_state[9], all_score[9])
+						  
+						  # 第九局、第十局都 Strike 時，第十局額外投球會影響第九局的額外得分
+						  all_state[8], all_score[8] = addAnotherPoint(ball1, ball2, all_state[8], all_score[8])
+						  
+						  # 回傳總分，直接用 sum() 函數將 list 內所有元素加總
+						  return sum(all_score)
+						 
+						def main():
+						  score=startGame()
+						  print("%d"%score)
+
+						if __name__=='__main__':
+						  main()
+					</code></pre> 
+				</section>
+			</section>
+		</section>
 
           <section>
             <h3 >解答</h3>
