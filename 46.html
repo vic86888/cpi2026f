@@ -194,10 +194,11 @@
 					<pre style="font-size: 22px;"><code data-trim data-noescape data-line-numbers class="language-python">
 					def solve():
 						# 1. 讀取陣列大小 N
-						line = input().strip() # 讀取一行並去除頭尾多餘的空白
-						if not line:
-							return # 如果不小心直接按了 Enter，就結束程式
-						n = int(line)
+						# line = input().strip() # 讀取一行並去除頭尾多餘的空白
+						# if not line:
+						#	return # 如果不小心直接按了 Enter，就結束程式
+						# n = int(line)
+						n = int(input()) # 讀取陣列大小 N
 						
 						a = []
 						# 2. 持續讀取數字，直到陣列 a 裡面剛好裝滿 n 個數字為止
