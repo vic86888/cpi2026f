@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -20,38 +20,83 @@
   <script src="./dist/live2dcubismcore.js"></script>
   <script src="./dist/bundle.js"></script>
   <style>
-        ul,
-        ol {
-            list-style: none;
-            margin-left: 0;
-        }
+    ul,
+    ol {
+      list-style: none;
+      margin-left: 0;
+    }
 
-        .reveal {
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 26px;
-        }
+    .reveal {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      font-size: 26px;
+      overflow: hidden;
+    }
 
-        #pageIndex {
-            position: absolute;
-            right: 24px;
-            bottom: 24px;
-            background: #000;
-            color: #fff;
-            font-size: 20px;
-        }
+    .reveal .slides {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
 
-        .controls {
-            bottom: 24px !important;
-        }
+    #pageIndex {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      background: #000;
+      color: #fff;
+      font-size: 20px;
+    }
 
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-    </style>
+    .controls {
+      bottom: 24px !important;
+    }
+
+    .reveal .slides > section {
+      overflow-y: auto;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      padding: 20px 30px;
+      max-height: 100vh;
+      min-height: 0;
+      height: auto;
+      font-size: 22px;
+      line-height: 1.25;
+      word-wrap: break-word;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      touch-action: pan-y;
+    }
+
+    .reveal .slides > section p,
+    .reveal .slides > section table,
+    .reveal .slides > section ul,
+    .reveal .slides > section ol {
+      margin-top: 0.4em;
+      margin-bottom: 0.4em;
+    }
+
+    .reveal .slides > section .table,
+    .reveal .slides > section .th,
+    .reveal .slides > section .td {
+      width: 100%;
+      max-width: 1000px;
+      font-size: 20px;
+      line-height: 1.25;
+      word-wrap: break-word;
+      table-layout: fixed;
+    }
+
+    .table, .th, .td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 0px;
+      width: 1100px;
+    }
+  </style>
 </head>
 
 <body>
@@ -83,12 +128,8 @@
           &gt; (3 + 6) / 2 = 4.5<br><br>
           但本題只需要輸出<b>整數部分</b>，不需要小數部分。<br><br>
           因此：<br>
-          &gt; 中位數輸出為 <b>4</b><br>
+          &gt; 中位數輸出為 <b>4</b><br><br>
           </p>
-        </section>
-
-        <section data-no="6" data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0" style="text-align: left">
-          <br><p><b>【輸入與輸出說明】</b></p>
           <table class="table">
             <tr>
               <th class="th">輸入說明</th>
@@ -96,7 +137,7 @@
             </tr>
             <tr>
               <td class="td">輸入檔包含一連串整數 X，每行一個。<br><br>
-              0 ≤ X &lt; 2³¹<br>
+              0 ≤ X < 2³¹<br>
               總共輸入的整數個數 N 小於 10000。<br>
               每個數字前後可能有空白。</td>
               <td class="td">每讀入一個整數後，都要輸出目前所有已讀入數字的中位數。<br>
