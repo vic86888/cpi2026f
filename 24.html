@@ -514,7 +514,7 @@ def Smaller(computer, member, flag):
         if (flag[i] == False):  # 如果該玩家尚未結束
             minimum = min(minimum, member[i])  # 找出最低的玩家分數
 
-    if (computer <= minimum):  # 若電腦的分數小於等於最小玩家分數
+    if (computer < minimum):  # 若電腦的分數小於等於最小玩家分數
         return True
     return False
 
