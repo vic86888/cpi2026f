@@ -120,7 +120,7 @@
                  data-positionx="0.8" data-positiony="0.03" data-scale="1" data-motionno="0"
                     style="text-align: left"><br>
                     <br>&emsp;&emsp;7.若所有玩家都已有結果（皆爆掉或是總點數為10.5），則遊戲結束，否則換電腦要牌。<br>
-                    <br>&emsp;&emsp;8.若電腦總點數小於未爆掉的玩家中的最小點數，則持續要牌。<br>
+                    <br>&emsp;&emsp;8.若電腦總點數小於等於未爆掉的玩家中的最小點數，則持續要牌。<br>
                     <br>&emsp;&emsp;9.若電腦總點數等於10.5，則電腦停止要牌，未爆掉的玩家須賠給莊家自己下注的金額（玩家立賠），遊戲結束。<br>
                     <br>&emsp;&emsp;10.若電腦總點數超過10.5，則電腦爆掉，電腦停止要牌，電腦須賠給所有未爆掉的玩家所下注的金額（電腦立賠），遊戲結束。<br>
                     <br>&emsp;&emsp;11.若電腦總點數大於未爆掉的玩家中的最小點數，電腦停止要牌，電腦將與所有未爆掉的玩家比較點數。若電腦的點數大於等於玩家點數為電腦勝，玩家所下注的金額歸電腦所有。若電腦的點數小於玩家點數為玩家勝，電腦需賠給玩家所下注的金額。當全部比較完畢後，遊戲結束。<br>
@@ -403,7 +403,7 @@
                                 if (flag[i] == False):
                                     minimum = min(minimum, member[i])
                         
-                            if (computer < minimum):
+                            if (computer <= minimum):
                                 return True
                             return False
                         
@@ -514,7 +514,7 @@ def Smaller(computer, member, flag):
         if (flag[i] == False):  # 如果該玩家尚未結束
             minimum = min(minimum, member[i])  # 找出最低的玩家分數
 
-    if (computer < minimum):  # 若電腦的分數小於等於最小玩家分數
+    if (computer <= minimum):  # 若電腦的分數小於等於最小玩家分數
         return True
     return False
 
